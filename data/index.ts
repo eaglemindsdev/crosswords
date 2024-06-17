@@ -11,7 +11,7 @@ export const footerData = {
 
 export const homePage = {
   title: 'Welcome to the Ultimate Crossword Solver and Puzzle Resource',
-  description: 'Welcome to [Your Website Name], your number one source for solving all types of crossword puzzles. Whether you are looking for quick answers to tricky clues or want to challenge yourself with new puzzles, we have got you covered. Our comprehensive database includes solutions for popular crosswords like the New York Times, LA Times, USA Today, and many more. Explore our blog for tips, tricks, and strategies to improve your puzzle-solving skills.',
+  description: 'Welcome to Crossword Solver Online, your number one source for solving all kinds of crossword puzzles. Our site is entire of anagrams, word definitions, or just a way to see if a given word fits into your current puzzle. Our vast database contains famous crossword solutions published in the New York Times, LA Times, USA Today, and many more. Read our blog for tips, tricks, and strategies to solve those terrific clues.',
 }
 
 export const blogsPage = {

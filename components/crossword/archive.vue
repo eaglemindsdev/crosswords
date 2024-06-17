@@ -50,6 +50,62 @@ function slugToNormalWords(slug: string): string {
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ')
 }
+
+useHead({
+  title: categoryName.value + ' Crossword Answers & Solutions | Your Ultimate Puzzle Resource',
+  meta: [
+    {
+      name: 'description',
+      content: 'Find the latest '+ categoryName.value +' crossword answers and solutions. Stay updated with daily puzzle answers and improve your crossword skills with our tips and resources.',
+    },
+    {
+      name: 'keywords',
+      content: categoryName.value +' crossword answers, '+ categoryName.value +' crossword solutions, daily crossword puzzles, puzzle-solving tips, crossword resources',
+    },
+    {
+      property: 'og:title',
+      content: categoryName.value +' Crossword Answers & Solutions | Your Ultimate Puzzle Resource',
+    },
+    {
+      property: 'og:description',
+      content: 'Find the latest '+ categoryName.value +' crossword answers and solutions. Stay updated with daily puzzle answers and improve your crossword skills with our tips and resources.',
+    },
+    {
+      property: 'og:type',
+      content: 'website',
+    },
+    {
+      property: 'og:url',
+      content: 'https://yourwebsite.com/crossword-answers/'+category.value,
+    },
+    {
+      property: 'og:image',
+      content: 'https://yourwebsite.com/images/usa-today-og-image.jpg',
+    },
+    {
+      name: 'twitter:card',
+      content: 'summary_large_image',
+    },
+    {
+      name: 'twitter:title',
+      content: categoryName.value +' Crossword Answers & Solutions | Your Ultimate Puzzle Resource',
+    },
+    {
+      name: 'twitter:description',
+      content: 'Find the latest '+ categoryName.value +' crossword answers and solutions. Stay updated with daily puzzle answers and improve your crossword skills with our tips and resources.',
+    },
+    {
+      name: 'twitter:image',
+      content: 'https://yourwebsite.com/images/usa-today-twitter-image.jpg',
+    },
+    {
+      name: 'canonical',
+      content: 'https://yourwebsite.com/crossword-answers/'+category.value,
+    }
+  ],
+  titleTemplate: 'Crossword Solver Online | %s',
+})
+
 </script>
 
 <template>

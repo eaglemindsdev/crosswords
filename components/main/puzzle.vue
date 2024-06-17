@@ -32,11 +32,11 @@ export default {
 
 <template>
   <div class="w-full mt-3">
-    <h2 class="text-[22px] leading-8 dark:text-zinc-300 lg:text-2xl lg:leading-8 lg:mb-3">
+    <h2 class="text-black dark:text-zinc-300   font-semibold leading-tight text-2xl md:text-3xl my-5">
       Today’s Featured Puzzles
     </h2>
     <p class="dark:text-zinc-300">
-      Stay updated with the latest puzzles and solutions. Find answers to today’s top crossword puzzles:
+      Stay updated with the latest puzzles and solutions. Find today's top crossword puzzle answers:
     </p>
 
     <div v-if="loading" class="grid grid-cols-1 lg:grid-cols-2">
@@ -75,7 +75,7 @@ export default {
               <li class="text-sm dark:text-zinc-300 lg:truncate hover:text-purple-800 active:underline">{{ puzzle.name }}</li>
             </ul>
           </NuxtLink>
-          <NuxtLink :to="puzzle.link">
+          <NuxtLink :to="puzzle.link+'/'+puzzle.date">
             <ul>
               <li class="whitespace-nowrap place-self-start text-cws-gray-900 text-sm/7 dark:text-zinc-300 hover:text-purple-700 active:underline">{{ puzzle.date }}</li>
             </ul>

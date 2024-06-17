@@ -16,10 +16,20 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <NuxtLink :to="`crossword-answers/${link}`">
+  
     <div class="flex justify-between gap-2 items-center border-b border-b dark:border-gray-800 border-b-gainsboro py-3">
-      <a class="text-sm lg:truncate hover:underline active:underline dark:text-gray-300">{{ name }}</a>
-      <a class="whitespace-nowrap place-self-start text-cws-gray-900 text-sm/7 text-nowrap dark:text-gray-300 hover:underline active:underline">{{ date }}</a>
+      <NuxtLink :to="`crossword-answers/${link}`">
+        <ul>
+      <li class="text-sm lg:truncate hover:underline active:underline dark:text-gray-300">{{ name }}</li>
+        </ul>
+      </NuxtLink>
+      <NuxtLink :to="`crossword-answers/${link}/${date}`">
+        <ul>
+      <li class="whitespace-nowrap place-self-start text-cws-gray-900 text-sm/7 text-nowrap dark:text-gray-300 hover:underline active:underline">{{ date }}</li>
+        </ul>
+      </NuxtLink>
     </div>
-  </NuxtLink>
+
+       
+
 </template>

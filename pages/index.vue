@@ -1,23 +1,68 @@
 <script lang="ts" setup>
+
 useHead({
-  title: 'Free Crossword Puzzle Answers & Solutions',
+  title: 'Free Crossword Puzzle Answers & Solutions | Your Ultimate Puzzle Resource',
   meta: [
     {
       name: 'description',
-      content:
-        'Looking for crossword puzzle answers? Find solutions for popular crosswords like the NY Times, LA Times, USA Today, and more. Improve your puzzle-solving skills with our tips and resources.',
+      content: 'Your number one source for solving all types of crossword puzzles. Find solutions for popular crosswords like NY Times, LA Times, USA Today, and more. Improve your puzzle-solving skills with our tips and resources.',
     },
+    {
+      name: 'keywords',
+      content: 'crossword puzzle answers, crossword solutions, NY Times crossword, LA Times crossword, USA Today crossword, puzzle-solving tips, crossword resources, Daily Themed crossword, Wall Street Journal crossword, Eugene Sheffer crossword, Thomas Joseph crossword, CodyCross, Universal crossword, Newsday crossword, 7 Little Words, Puzzle Page',
+    },
+    {
+      property: 'og:title',
+      content: 'Free Crossword Puzzle Answers & Solutions | Your Ultimate Puzzle Resource',
+    },
+    {
+      property: 'og:description',
+      content: 'Find solutions for popular crosswords like NY Times, LA Times, USA Today, and more. Improve your puzzle-solving skills with our tips and resources.',
+    },
+    {
+      property: 'og:type',
+      content: 'website',
+    },
+    {
+      property: 'og:url',
+      content: 'https://yourwebsite.com',
+    },
+    {
+      property: 'og:image',
+      content: 'https://yourwebsite.com/images/og-image.jpg',
+    },
+    {
+      name: 'twitter:card',
+      content: 'summary_large_image',
+    },
+    {
+      name: 'twitter:title',
+      content: 'Free Crossword Puzzle Answers & Solutions | Your Ultimate Puzzle Resource',
+    },
+    {
+      name: 'twitter:description',
+      content: 'Find solutions for popular crosswords like NY Times, LA Times, USA Today, and more. Improve your puzzle-solving skills with our tips and resources.',
+    },
+    {
+      name: 'twitter:image',
+      content: 'https://yourwebsite.com/images/twitter-image.jpg',
+    },
+    {
+      name: 'canonical',
+      content: 'https://yourwebsite.com',
+    }
   ],
-  titleTemplate: 'Crossword Solver | %s',
+  titleTemplate: 'Crossword Solver online | %s',
 })
 
+
 // Generate OG Image
-defineOgImageComponent('About', {
-  headline: 'Greetings 👋',
-  title: 'Crossword Solve',
-  description: 'Dive into web development with me and learn Js, Ts, Vue, Nuxt, Docker, k8s',
-  link: '/riyad.jpg',
-})
+// defineOgImageComponent('About', {
+//   headline: 'Greetings 👋',
+//   title: 'Crossword Solver Online',
+//   description: 'Dive into web development with me and learn Js, Ts, Vue, Nuxt, Docker, k8s',
+//   link: '/riyad.jpg',
+// })
 </script>
 
 <template>

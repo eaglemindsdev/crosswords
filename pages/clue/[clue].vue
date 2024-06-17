@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
+import { useHead } from '@vueuse/head' // Assuming you are using the vueuse/head package
 import { getClueAnswerBySlug, getCrosswordCluesByCategorySlugAndDate } from '@/api/service'
 
 const route = useRoute()
-const puzzles = ref<any[]>([])
+const puzzles = ref<any>(null) // Ensure puzzles is initialized properly
 const puzzlesData = ref<any[]>([])
 const loading = ref(true)
 const loadingData = ref(true)
@@ -18,14 +19,76 @@ async function fetchPuzzles() {
     puzzles.value.formattedDateOne = formatDateOne(puzzles.value.updated_time)
 
     fetchPuzzlesData(puzzles.value.cat_slug, extractDate(puzzles.value.updated_time))
+
+
+    useHead({
+  title: `Clue: ${puzzles.value.crossword} | ${puzzles.value?.crossword} Crossword Answer | ${puzzles.value?.formattedDate}`,
+   
+  meta: [
+    {
+      name: 'description',
+      content: `Discover the crossword clue "${puzzles.value?.crossword}" with answer "${puzzles.value?.answer}" from the USA Today crossword dated ${puzzles.value?.formattedDate}. Find crossword answers and solutions on our puzzle-solving platform.`,
+    },
+    {
+      name: 'keywords',
+      content: `${puzzles.value?.crossword} clue, crossword clue ${puzzles.value?.answer}, USA Today crossword ${puzzles.value?.formattedDate}, crossword answers, puzzle-solving platform`,
+    },
+    {
+      property: 'og:title',
+      content: `Clue: ${puzzles.value?.crossword} | USA Today Crossword Answer | ${puzzles.value?.formattedDate}`,
+    },
+    {
+      property: 'og:description',
+      content: `Discover the crossword clue "${puzzles.value?.crossword}" with answer "${puzzles.value?.answer}" from the USA Today crossword dated ${puzzles.value?.formattedDate}. Find crossword answers and solutions on our puzzle-solving platform.`,
+    },
+    {
+      property: 'og:type',
+      content: 'website',
+    },
+    {
+      property: 'og:url',
+      content: `https://yourwebsite.com/clue/${route.params.clue}`, // Replace with actual URL
+    },
+    {
+      property: 'og:image',
+      content: 'https://yourwebsite.com/images/clue-les-og-image.jpg', // Replace with actual image URL
+    },
+    {
+      name: 'twitter:card',
+      content: 'summary_large_image',
+    },
+    {
+      name: 'twitter:title',
+      content: `Clue: ${puzzles.value?.crossword} | USA Today Crossword Answer | ${puzzles.value?.formattedDate}`,
+    },
+    {
+      name: 'twitter:description',
+      content: `Discover the crossword clue "${puzzles.value?.crossword}" with answer "${puzzles.value?.answer}" from the USA Today crossword dated ${puzzles.value?.formattedDate}. Find crossword answers and solutions on our puzzle-solving platform.`,
+    },
+    {
+      name: 'twitter:image',
+      content: 'https://yourwebsite.com/images/clue-les-twitter-image.jpg', // Replace with actual image URL
+    },
+    {
+      name: 'canonical',
+      content: `https://yourwebsite.com/clue/${route.params.clue}`, // Replace with actual canonical URL
+    },
+  ],
+  titleTemplate: '%s | Crossword Solver Online',
+})
   }
   catch (error) {
     console.error('Failed to load puzzles:', error)
   }
   finally {
     loading.value = false
+    
   }
 }
+
+onMounted(() => {
+  fetchPuzzles()
+})
 
 function formatDate(dateString: string): string {
   const date = new Date(dateString)
@@ -54,16 +117,14 @@ const category = computed(() => {
   return Array.isArray(name) ? name[0] : name
 })
 
-const date = ref('')
-
-async function fetchPuzzlesData(cat_slug, date) {
+async function fetchPuzzlesData(cat_slug: string, date: string) {
   loadingData.value = true
   try {
     const response = await getCrosswordCluesByCategorySlugAndDate(cat_slug, date)
     puzzlesData.value = response.crosswordResults // Assuming the response structure
   }
   catch (error) {
-    console.error('Failed to load puzzles:', error)
+    console.error('Failed to load puzzles data:', error)
   }
   finally {
     loadingData.value = false
@@ -79,16 +140,73 @@ function slugToNormalWords(slug: string): string {
     .join(' ')
 }
 
-onMounted(() => {
-  fetchPuzzles()
-})
 
-const showAnswer = ref(false)
+
+const showAnswer = ref(false);
 
 function revealAnswer() {
   showAnswer.value = true
 }
+
+function updateHead() {
+useHead({
+  title: `Clue: ${puzzles.value.crossword} | ${puzzles.value?.crossword} Crossword Answer | ${puzzles.value?.formattedDate}`,
+   
+  meta: [
+    {
+      name: 'description',
+      content: `Discover the crossword clue "${puzzles.value?.crossword}" with answer "${puzzles.value?.answer}" from the USA Today crossword dated ${puzzles.value?.formattedDate}. Find crossword answers and solutions on our puzzle-solving platform.`,
+    },
+    {
+      name: 'keywords',
+      content: `${puzzles.value?.crossword} clue, crossword clue ${puzzles.value?.answer}, USA Today crossword ${puzzles.value?.formattedDate}, crossword answers, puzzle-solving platform`,
+    },
+    {
+      property: 'og:title',
+      content: `Clue: ${puzzles.value?.crossword} | USA Today Crossword Answer | ${puzzles.value?.formattedDate}`,
+    },
+    {
+      property: 'og:description',
+      content: `Discover the crossword clue "${puzzles.value?.crossword}" with answer "${puzzles.value?.answer}" from the USA Today crossword dated ${puzzles.value?.formattedDate}. Find crossword answers and solutions on our puzzle-solving platform.`,
+    },
+    {
+      property: 'og:type',
+      content: 'website',
+    },
+    {
+      property: 'og:url',
+      content: `https://yourwebsite.com/clue/${route.params.clue}`, // Replace with actual URL
+    },
+    {
+      property: 'og:image',
+      content: 'https://yourwebsite.com/images/clue-les-og-image.jpg', // Replace with actual image URL
+    },
+    {
+      name: 'twitter:card',
+      content: 'summary_large_image',
+    },
+    {
+      name: 'twitter:title',
+      content: `Clue: ${puzzles.value?.crossword} | USA Today Crossword Answer | ${puzzles.value?.formattedDate}`,
+    },
+    {
+      name: 'twitter:description',
+      content: `Discover the crossword clue "${puzzles.value?.crossword}" with answer "${puzzles.value?.answer}" from the USA Today crossword dated ${puzzles.value?.formattedDate}. Find crossword answers and solutions on our puzzle-solving platform.`,
+    },
+    {
+      name: 'twitter:image',
+      content: 'https://yourwebsite.com/images/clue-les-twitter-image.jpg', // Replace with actual image URL
+    },
+    {
+      name: 'canonical',
+      content: `https://yourwebsite.com/clue/${route.params.clue}`, // Replace with actual canonical URL
+    },
+  ],
+  titleTemplate: '%s | Crossword Solver Online',
+})
+}
 </script>
+
 
 <template>
   <main class="container max-w-6xl mx-auto">
@@ -118,10 +236,10 @@ function revealAnswer() {
               </div>
               <div v-else>
                 <h1 class="text-xl md:text-2xl lg:text-2xl font-bold mb-4">
-                  {{ puzzles.crossword }} Crossword Clue
+                  {{ puzzles ? `${puzzles.crossword} Crossword Clue` : 'Loading...' }}
                 </h1>
                 <p class="text-xs sm:text-sm my-3 mx-auto text-zinc-600 dark:text-zinc-400">
-                  Here is the answer for the crossword clue {{ puzzles.crossword }} featured in {{ puzzles.category_name }} puzzle on {{ puzzles.formattedDate }}.
+                  Here is the answer for the crossword clue {{ puzzles.crossword }} featured in {{ puzzles?.category_name }} puzzle on {{ puzzles.formattedDate }}.
                 </p>
                 <p class="text-xs sm:text-sm my-3 mx-auto text-zinc-600 dark:text-zinc-400">
                   We have found 40 possible answers for this clue in our database. Among them, one solution stands out with a 98% match which has a length of 5 letters. We think the likely answer to this clue is <span class="font-bold">{{ puzzles.answer }}</span>.
@@ -129,7 +247,7 @@ function revealAnswer() {
                 <h2 class="text-xl md:text-2xl lg:text-2xl font-semibold">
                   Crossword Answer:
                 </h2>
-                <a href="#all-related-clues-answer-by-date">{{ puzzles.category_name }}, {{ puzzles.formattedDateOne }}</a>
+                <a href="#all-related-clues-answer-by-date">{{ puzzles?.category_name }}, {{ puzzles.formattedDateOne }}</a>
                 <div class="p-4 rounded-lg mb-4">
                   <div class="flex justify-between items-center border dark:border-gray-800 p-3 rounded-md min-w-[200px] dark:bg-slate-900">
                     <div class="flex space-x-2">
@@ -186,7 +304,7 @@ function revealAnswer() {
                   <div class="px-2 flex flex-row items-start space-y-1 space-x-2">
                     <Icon name="mdi:star-three-points-outline" size="1.5em" class="text-black dark:text-zinc-300 mt-1" />
                     <h2 class="text-1xl font-semibold text-black dark:text-zinc-300">
-                      Clue {{ puzzles.category_name }} puzzle on {{ puzzles.formattedDate }}
+                      Clue {{ puzzles?.category_name }} puzzle on {{ puzzles?.formattedDate }}
                     </h2>
                   </div>
                   <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1">

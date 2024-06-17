@@ -63,6 +63,7 @@ function getDateBasedOnIndex(index: number): string {
       return today.toISOString().split('T')[0]
   }
 }
+
 </script>
 
 <template>
