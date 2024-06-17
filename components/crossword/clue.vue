@@ -23,11 +23,11 @@ async function fetchPuzzles() {
   loading.value = false
   try {
     const response = await getCrosswordCluesByCategorySlugAndDate(category.value, date)
-    console.log(response)
+   // console.log(response)
     puzzles.value = response.crosswordResults // Assuming the response structure
   }
   catch (error) {
-    console.error('Failed to load puzzles:', error)
+    console.error('Failed to load puzzles:', error);
   }
   finally {
     loading.value = false
