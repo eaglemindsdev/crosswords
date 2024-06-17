@@ -15,7 +15,7 @@ withDefaults(defineProps<Props>(), {
 <template>
   <NuxtLink :to="link">
     <div class="flex justify-center items-center border-b border-b-gainsboro  border-b dark:border-gray-800 py-3 dark:text-gray-300">
-      <a class="whitespace-nowrap place-self-start text-cws-gray-900 text-sm/7 text-nowrap hover:underline active:underline">{{ date }}</a>
+      <li class="whitespace-nowrap place-self-start text-cws-gray-900 text-sm/7 text-nowrap hover:underline active:underline">{{ date }}</li>
     </div>
   </NuxtLink>
 </template>
