@@ -1,41 +1,30 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import { useRoute } from 'vue-router';
-const route = useRoute();
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
 
 const category = computed(() => {
-  const name = route.params.slug || '';
-  return Array.isArray(name) ? name[0] : name;
-});
+  const name = route.params.slug || ''
+  return Array.isArray(name) ? name[0] : name
+})
 
-
-
-const date = route.params.date as string;
-
-
+const date = route.params.date as string
 </script>
 
 <template>
-    <main class="container max-w-6xl mx-auto text-zinc-600">
-  <div class="container mx-auto">
-   
-    <div class="grid grid-cols-1 sm:grid-cols-12 items-start">
-      
-      <div class="mt-5 px-3 col-span-12 lg:col-span-8">
-        
-        <div class="border dark:border-gray-800 p-3 rounded-md min-w-[200px] dark:bg-slate-900">
-
-        <CrosswordClue />
+  <main class="container max-w-6xl mx-auto text-zinc-600">
+    <div class="container mx-auto">
+      <div class="grid grid-cols-1 sm:grid-cols-12 items-start">
+        <div class="mt-5 px-3 col-span-12 lg:col-span-8">
+          <div class="border dark:border-gray-800 p-3 rounded-md min-w-[200px] dark:bg-slate-900">
+            <CrosswordClue />
+          </div>
+        </div>
+        <div class="m-5 col-span-12 lg:col-span-4">
+          <MainSidebar />
         </div>
       </div>
-      <div class="m-5 col-span-12 lg:col-span-4">
-        <MainSidebar />
-            
-       </div>
-      
     </div>
-  </div>
-</main>
-  
+  </main>
 </template>
-

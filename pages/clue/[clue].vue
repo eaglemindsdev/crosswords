@@ -1,92 +1,93 @@
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue';
-import { useRoute } from 'vue-router';
-import { getClueAnswerBySlug, getCrosswordCluesByCategorySlugAndDate } from '@/api/service';
+import { computed, onMounted, ref } from 'vue'
+import { useRoute } from 'vue-router'
+import { getClueAnswerBySlug, getCrosswordCluesByCategorySlugAndDate } from '@/api/service'
 
-const route = useRoute();
-const puzzles = ref<any[]>([]);
-  const puzzlesData = ref<any[]>([]);
-const loading = ref(true);
-const loadingData = ref(true);
+const route = useRoute()
+const puzzles = ref<any[]>([])
+const puzzlesData = ref<any[]>([])
+const loading = ref(true)
+const loadingData = ref(true)
 
-const fetchPuzzles = async () => {
-  loading.value = true;
+async function fetchPuzzles() {
+  loading.value = true
   try {
-    const response = await getClueAnswerBySlug(category.value);
-    puzzles.value = response[0]; // Assuming the response structure
-    puzzles.value.formattedDate = formatDate(puzzles.value.updated_time);
-    puzzles.value.formattedDateOne = formatDateOne(puzzles.value.updated_time);
-    
-    fetchPuzzlesData(puzzles.value.cat_slug, extractDate(puzzles.value.updated_time));
-  } catch (error) {
-    console.error('Failed to load puzzles:', error);
-  } finally {
-    loading.value = false;
+    const response = await getClueAnswerBySlug(category.value)
+    puzzles.value = response[0] // Assuming the response structure
+    puzzles.value.formattedDate = formatDate(puzzles.value.updated_time)
+    puzzles.value.formattedDateOne = formatDateOne(puzzles.value.updated_time)
+
+    fetchPuzzlesData(puzzles.value.cat_slug, extractDate(puzzles.value.updated_time))
   }
-};
+  catch (error) {
+    console.error('Failed to load puzzles:', error)
+  }
+  finally {
+    loading.value = false
+  }
+}
 
-const formatDate = (dateString: string): string => {
-  const date = new Date(dateString);
-  const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-  return date.toLocaleDateString('en-US', options);
-};
+function formatDate(dateString: string): string {
+  const date = new Date(dateString)
+  const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' }
+  return date.toLocaleDateString('en-US', options)
+}
 
-const formatDateOne = (dateString: string): string => {
-  const date = new Date(dateString);
-  const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-  const formattedDate = date.toLocaleDateString('en-US', options);
-  const [month, day, year] = formattedDate.split(' ');
-  return `${month.toUpperCase()} / ${day.replace(',', '')} / ${year}`;
-};
+function formatDateOne(dateString: string): string {
+  const date = new Date(dateString)
+  const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' }
+  const formattedDate = date.toLocaleDateString('en-US', options)
+  const [month, day, year] = formattedDate.split(' ')
+  return `${month.toUpperCase()} / ${day.replace(',', '')} / ${year}`
+}
 
-const extractDate = (dateString: string): string => {
-  const date = dateString ? new Date(dateString) : new Date();
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
-};
-
+function extractDate(dateString: string): string {
+  const date = dateString ? new Date(dateString) : new Date()
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
 
 const category = computed(() => {
-  const name = route.params.clue || '';
-  return Array.isArray(name) ? name[0] : name;
-});
+  const name = route.params.clue || ''
+  return Array.isArray(name) ? name[0] : name
+})
 
-const date = ref('');
+const date = ref('')
 
-const fetchPuzzlesData = async (cat_slug, date) => {
-
-  loadingData.value = true;
+async function fetchPuzzlesData(cat_slug, date) {
+  loadingData.value = true
   try {
-    const response = await getCrosswordCluesByCategorySlugAndDate(cat_slug, date);
-    puzzlesData.value = response.crosswordResults; // Assuming the response structure
-  } catch (error) {
-    console.error('Failed to load puzzles:', error);
-  } finally {
-    loadingData.value = false;
+    const response = await getCrosswordCluesByCategorySlugAndDate(cat_slug, date)
+    puzzlesData.value = response.crosswordResults // Assuming the response structure
   }
-};
+  catch (error) {
+    console.error('Failed to load puzzles:', error)
+  }
+  finally {
+    loadingData.value = false
+  }
+}
 
-const categoryName = computed(() => slugToNormalWords(category.value));
+const categoryName = computed(() => slugToNormalWords(category.value))
 
-const slugToNormalWords = (slug: string): string => {
+function slugToNormalWords(slug: string): string {
   return slug
     .split('-')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
-};
+    .join(' ')
+}
 
 onMounted(() => {
-  fetchPuzzles();
- 
-});
+  fetchPuzzles()
+})
 
-const showAnswer = ref(false);
+const showAnswer = ref(false)
 
-const revealAnswer = () => {
-  showAnswer.value = true;
-};
+function revealAnswer() {
+  showAnswer.value = true
+}
 </script>
 
 <template>
@@ -95,62 +96,64 @@ const revealAnswer = () => {
       <div class="grid grid-cols-1 sm:grid-cols-12 items-start">
         <div class="m-5 col-span-12 lg:col-span-4">
           <MainSearch />
-        
         </div>
         <div class="col-span-12 lg:col-span-8">
           <div class="prose prose-pre:max-w-xs sm:prose-pre:max-w-full prose-sm sm:prose-base md:prose-lg prose-h1:no-underline max-w-5xl mx-auto prose-zinc dark:prose-invert prose-img:rounded-lg">
             <div class="container mx-auto p-4">
-
               <div v-if="loading" class="skeleton-loader">
-                <div class="skeleton h-8 w-3/4 mb-4"></div>
-                <div class="skeleton h-4 w-full my-3"></div>
-                <div class="skeleton h-4 w-full my-3"></div>
-                <div class="skeleton h-4 w-full my-3"></div>
-                <div class="skeleton h-4 w-full my-3"></div>
-                <div class="skeleton h-6 w-full mb-2"></div>
-                <div class="skeleton h-6 w-1/2 mb-2"></div>
-                <div class="skeleton h-4 w-1/3 mb-4"></div>
+                <div class="skeleton h-8 w-3/4 mb-4" />
+                <div class="skeleton h-4 w-full my-3" />
+                <div class="skeleton h-4 w-full my-3" />
+                <div class="skeleton h-4 w-full my-3" />
+                <div class="skeleton h-4 w-full my-3" />
+                <div class="skeleton h-6 w-full mb-2" />
+                <div class="skeleton h-6 w-1/2 mb-2" />
+                <div class="skeleton h-4 w-1/3 mb-4" />
                 <div class="flex justify-between items-center border dark:border-gray-800 p-3 rounded-md min-w-[200px] dark:bg-slate-900">
                   <div class="flex space-x-2">
-                    <div v-for="n in 5" :key="n" class="skeleton h-12 w-12"></div>
+                    <div v-for="n in 5" :key="n" class="skeleton h-12 w-12" />
                   </div>
-                  <div class="skeleton h-10 w-24"></div>
+                  <div class="skeleton h-10 w-24" />
                 </div>
               </div>
               <div v-else>
-
-
-              <h1 class="text-xl md:text-2xl lg:text-2xl font-bold mb-4">{{ puzzles.crossword }} Crossword Clue</h1>
-              <p class="text-xs sm:text-sm my-3 mx-auto text-zinc-600 dark:text-zinc-400">
-                Here is the answer for the crossword clue {{ puzzles.crossword }} featured in {{ puzzles.category_name }} puzzle on {{ puzzles.formattedDate }}.
-              </p>
-              <p class="text-xs sm:text-sm my-3 mx-auto text-zinc-600 dark:text-zinc-400">
-                We have found 40 possible answers for this clue in our database. Among them, one solution stands out with a 98% match which has a length of 5 letters. We think the likely answer to this clue is <span class="font-bold">{{ puzzles.answer }}</span>.
-              </p>
-              <h2 class="text-xl md:text-2xl lg:text-2xl font-semibold">Crossword Answer:</h2>
-              <a href="#all-related-clues-answer-by-date">{{ puzzles.category_name }}, {{ puzzles.formattedDateOne }}</a>
-              <div class="p-4 rounded-lg mb-4">
-                <div class="flex justify-between items-center border dark:border-gray-800 p-3 rounded-md min-w-[200px] dark:bg-slate-900">
-                  <div class="flex space-x-2">
-                    <span v-if="puzzles.answer" v-for="(char, index) in puzzles.answer.split('')" :key="index" class="text-3xl dark:font-bold p-2 border border-gray-300">{{ showAnswer ? char : '?' }}</span>
-                    <span v-else class="text-3xl dark:font-bold p-2 border border-gray-300">{{ '?' }}</span>
+                <h1 class="text-xl md:text-2xl lg:text-2xl font-bold mb-4">
+                  {{ puzzles.crossword }} Crossword Clue
+                </h1>
+                <p class="text-xs sm:text-sm my-3 mx-auto text-zinc-600 dark:text-zinc-400">
+                  Here is the answer for the crossword clue {{ puzzles.crossword }} featured in {{ puzzles.category_name }} puzzle on {{ puzzles.formattedDate }}.
+                </p>
+                <p class="text-xs sm:text-sm my-3 mx-auto text-zinc-600 dark:text-zinc-400">
+                  We have found 40 possible answers for this clue in our database. Among them, one solution stands out with a 98% match which has a length of 5 letters. We think the likely answer to this clue is <span class="font-bold">{{ puzzles.answer }}</span>.
+                </p>
+                <h2 class="text-xl md:text-2xl lg:text-2xl font-semibold">
+                  Crossword Answer:
+                </h2>
+                <a href="#all-related-clues-answer-by-date">{{ puzzles.category_name }}, {{ puzzles.formattedDateOne }}</a>
+                <div class="p-4 rounded-lg mb-4">
+                  <div class="flex justify-between items-center border dark:border-gray-800 p-3 rounded-md min-w-[200px] dark:bg-slate-900">
+                    <div class="flex space-x-2">
+                      <span v-for="(char, index) in puzzles.answer.split('')" v-if="puzzles.answer" :key="index" class="text-3xl dark:font-bold p-2 border border-gray-300">{{ showAnswer ? char : '?' }}</span>
+                      <span v-else class="text-3xl dark:font-bold p-2 border border-gray-300">{{ '?' }}</span>
+                    </div>
+                    <button class="bg-blue-500 text-white px-4 py-2 hover:bg-blue-600" @click="revealAnswer">
+                      Show
+                    </button>
                   </div>
-                  <button @click="revealAnswer" class="bg-blue-500 text-white px-4 py-2 hover:bg-blue-600">Show</button>
                 </div>
               </div>
-            </div>
-         
+
               <!-- <h2 class="text-xl font-semibold mb-2">40 Potential Answers:</h2>
               <table class="min-w-full">
                 <tbody class="dark:bg-slate-900"> -->
-                   <!-- <tr
+              <!-- <tr
                 v-for="answer in clueData.potentialAnswers"
                         :key="answer.answer" class="border dark:border-gray-800 p-4 dark:bg-slate-900"
-                  
+
                 >
                   <td colspan=5 class="gap-2">
                     <div class="grid grid-cols-1 px-5">
-                      
+
                         <div class="flex justify-between items-center mb-2">
                           <span class="py-1.5 text-center block text-xs font-bold h-7 w-12 rounded-sm bg-green-100 text-green-900">
                             {{ answer.rank }}
@@ -168,22 +171,23 @@ const revealAnswer = () => {
                           <div class="text-sm text-gray-500">
                           {{ answer.source }}
                         </div>
-                          
+
                         </div>
-                        
-                     
+
                     </div>
-                    
+
                   </td>
-                 
+
                 </tr> -->
-                <!-- </tbody>
+              <!-- </tbody>
               </table> -->
               <section id="all-related-clues-answer-by-date">
                 <div class="p-3 border dark:border-gray-800 rounded-md  dark:bg-slate-900">
                   <div class="px-2 flex flex-row items-start space-y-1 space-x-2">
                     <Icon name="mdi:star-three-points-outline" size="1.5em" class="text-black dark:text-zinc-300 mt-1" />
-                    <h2 class="text-1xl font-semibold text-black dark:text-zinc-300">Clue {{ puzzles.category_name }} puzzle on {{ puzzles.formattedDate }}</h2>
+                    <h2 class="text-1xl font-semibold text-black dark:text-zinc-300">
+                      Clue {{ puzzles.category_name }} puzzle on {{ puzzles.formattedDate }}
+                    </h2>
                   </div>
                   <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1">
                     <template v-for="post in puzzlesData" :key="post.cat_slug">
@@ -195,7 +199,7 @@ const revealAnswer = () => {
                   <div v-if="loadingData" class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1">
                     <div class="lg:col-span-1">
                       <div v-for="n in 25" :key="n" class="flex justify-between gap-2 items-center border-b border-b-gainsboro py-3 animate-pulse">
-                        <div class="bg-gray-300 h-5 w-2/4 rounded"></div>                        
+                        <div class="bg-gray-300 h-5 w-2/4 rounded" />
                       </div>
                     </div>
                   </div>
@@ -208,6 +212,7 @@ const revealAnswer = () => {
     </div>
   </main>
 </template>
+
 <style scoped>
 .skeleton {
   background-color: #e0e0e0;

@@ -1,4 +1,6 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+import { defineNuxtConfig } from 'nuxt/config'
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
+
 export default defineNuxtConfig({
   app: {
     head: {
@@ -59,6 +61,52 @@ export default defineNuxtConfig({
   content: {
     highlight: {
       theme: 'dracula',
+    },
+  },
+
+  build: {
+    analyze: true, // Enable bundle analyzer
+    extend(config, { isDev, isClient }) {
+      if (!isDev && isClient) {
+        config.plugins.push(
+          new BundleAnalyzerPlugin({
+            analyzerMode: 'static',
+            reportFilename: './bundle-report.html',
+            openAnalyzer: false
+          })
+        );
+      }
+    }
+  },
+
+  vite: {
+    build: {
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          drop_console: true, // Remove console logs in production
+        },
+      },
+    },
+  },
+
+  hooks: {
+    'build:before'(builder) {
+      if (process.env.NODE_ENV === 'production') {
+        const { default: PurgeCSS } = require('@fullhuman/postcss-purgecss')
+        builder.options.build.postcss.plugins.push(
+          PurgeCSS({
+            content: [
+              'components/**/*.vue',
+              'layouts/**/*.vue',
+              'pages/**/*.vue',
+              'plugins/**/*.js',
+              'nuxt.config.js',
+            ],
+            safelist: ['html', 'body'],
+          })
+        )
+      }
     },
   },
 })

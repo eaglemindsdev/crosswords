@@ -21,7 +21,7 @@ withDefaults(defineProps<Props>(), {
 <template>
   <header>
     <h1 class="text-xl dark:text-zinc-300 md:text-2xl lg:text-2xl m-5 font-bold text-start">
-      {{'Divorcée in 1990s New York tabloids Crossword Clue'  || '' }}
+      {{ 'Divorcée in 1990s New York tabloids Crossword Clue' || '' }}
     </h1>
     <!-- <NuxtImg
       :src="image || ''"

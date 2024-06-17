@@ -19,8 +19,6 @@ const formattedData = computed(() => {
     }
   })
 })
-
-
 </script>
 
 <template>

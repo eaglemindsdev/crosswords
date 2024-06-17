@@ -4,10 +4,8 @@ import { homePage } from '~/data'
 
 <template>
   <div class="container mx-auto">
-   
     <div class="grid grid-cols-1 sm:grid-cols-12 items-start">
       <div class="m-5 col-span-12 lg:col-span-4">
-      
         <MainSearch />
       </div>
       <div class="px-3 col-span-12 lg:col-span-8">
@@ -17,13 +15,9 @@ import { homePage } from '~/data'
         <p class="dark:text-zinc-300">
           {{ homePage.description }}
         </p>
-        
 
         <MainPuzzle />
-        
       </div>
-      
     </div>
   </div>
-  
 </template>
