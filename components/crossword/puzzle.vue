@@ -64,6 +64,63 @@ function getDateBasedOnIndex(index: number): string {
   }
 }
 
+useHead({
+  title: 'All Crossword Puzzle Answers Online',
+  meta: [
+    {
+      name: 'description',
+      content: 'Get the latest crossword puzzle answers for all major publications, including NYT, USA Today, LA Times, and more. Answers are updated daily.',
+    },
+    {
+      name: 'keywords',
+      content: 'Crossword puzzle solutions, daily crossword answers, NYT crossword, USA Today crossword, LA Times crossword, Latest Crossword solutions, Puzzle solutions, Daily puzzle help',
+    },
+    {
+      property: 'og:title',
+      content: 'All Crossword Puzzle Answers Online - Latest Solutions',
+    },
+    {
+      property: 'og:description',
+      content: 'Find crossword puzzle answers for today. Solve puzzles from NYT, USA Today, LA Times, and more. Explore crossword-solving tips and resources.',
+    },
+    {
+      property: 'og:type',
+      content: 'website',
+    },
+    {
+      property: 'og:url',
+      content: 'https://yourwebsite.com/crossword-answers',
+    },
+    {
+      property: 'og:image',
+      content: 'https://yourwebsite.com/images/crossword-answers-og-image.jpg',
+    },
+    {
+      name: 'twitter:card',
+      content: 'summary_large_image',
+    },
+    {
+      name: 'twitter:title',
+      content: 'All Crossword Puzzle Answers Online - Latest Solutions | Crossword Solver',
+    },
+    {
+      name: 'twitter:description',
+      content: 'Find crossword puzzle answers for today. Solve puzzles from NYT, USA Today, LA Times, and more. Explore crossword-solving tips and resources.',
+    },
+    {
+      name: 'twitter:image',
+      content: 'https://yourwebsite.com/images/crossword-answers-twitter-image.jpg',
+    },
+    {
+      name: 'canonical',
+      content: 'https://yourwebsite.com/crossword-answers',
+    }
+  ],
+  titleTemplate: 'Crossword Solver Online | %s',
+})
+
+
+
 </script>
 
 <template>
