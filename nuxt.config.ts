@@ -73,11 +73,8 @@ export default defineNuxtConfig({
    
   },
   site: {
-    url: 'https://blog.nurriyad.xyz',
-    identity: {
-      type: 'Person',
-    },
-    twitter: '@qdnvubp',
+    url: 'https://c139f532.crosswords-ai8.pages.dev',
+    
   },
 
   typescript: {
