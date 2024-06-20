@@ -1,6 +1,26 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+import { defineNuxtConfig } from 'nuxt/config';
+import generateSitemapEntries from './api/sitemap_categories';
+import generateSitemapCategoryDateEntries from './api/sitemap/sitemap_category_datewise';
+
+import { getLast10Months, generateSitemapEntriesForMonth } from './api/sitemap/sitemap_month'; // Adjust path as per your project structure
+
+const last10Months = getLast10Months();
+
+const monthUrl = () =>
+last10Months.map(slug => ({
+  
+    path: `clue/posts-${slug}.xml`, // Path for dynamic sitemap
+    urls: generateSitemapEntriesForMonth(slug),
+  
+}));
+// Define the structure of the sitemap routes
+interface SitemapRoute {
+  url: string;
+  changefreq: string;
+  priority: number;
+}
+
 export default defineNuxtConfig({
- 
   app: {
     head: {
       charset: 'utf-16',
@@ -14,7 +34,43 @@ export default defineNuxtConfig({
   },
 
   sitemap: {
-    strictNuxtContentPaths: true,
+    path: '/sitemap.xml', // Main sitemap path (optional)
+    hostname: 'http://localhost:3000', // Your website URL
+    gzip: true, // Enable gzip compression for the generated sitemap.xml
+    exclude: ['/admin/**'], // Optional: Array of URLs to exclude from the sitemap
+    routes: async (): Promise<SitemapRoute[]> => {
+      let routes: SitemapRoute[] = [];
+
+      // Example: Define main routes
+      routes.push(
+        { url: '/', changefreq: 'daily', priority: 1 },
+        { url: '/about', changefreq: 'weekly', priority: 0.8 }
+      );
+
+      return routes;
+    },
+    sitemaps: {  
+      
+      
+      'crossword-answer-categories': {
+        path: '/crossword-answer-categories.xml',       
+        urls: generateSitemapEntries,
+      },
+      'crossword-answer-datewise': {
+        path: '/crossword-answer-datewise.xml',       
+        urls: generateSitemapCategoryDateEntries,
+      },      
+      ...monthUrl(),
+      
+      
+     
+      // Generate sitemap configuration for each of the last 10 months
+   
+    
+      
+    },
+
+   
   },
   site: {
     url: 'https://blog.nurriyad.xyz',
@@ -31,7 +87,9 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       crawlLinks: true,
-      routes: ['/'],
+      routes: [
+        '/',
+      ],
     },
   },
 
@@ -50,15 +108,14 @@ export default defineNuxtConfig({
     '@nuxtjs/robots',
     '@nuxtjs/fontaine',
     '@nuxtjs/color-mode',
-    'nuxt-simple-sitemap',
+    '@nuxtjs/sitemap',
     '@nuxtjs/tailwindcss',
     '@stefanobartoletti/nuxt-social-share',
   ],
 
   content: {
-    documentDriven: true,
     highlight: {
       theme: 'dracula',
     },
   },
-})
+});

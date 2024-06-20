@@ -67,6 +67,8 @@ async function getFeaturedCategories() {
   }
 }
 
+
+
 // Fetch a single crosswords clue by slug
 async function getClueAnswerBySlug(slug) {
   try {
@@ -160,4 +162,19 @@ async function deleteBlog(id) {
   }
 }
 
-export { getCategories, getFeaturedCategories, getDatelistsByCategorySlug, getCrosswordCluesByCategorySlugAndDate, getClueAnswerBySlug, getBlogById, createBlog, updateBlog, deleteBlog }
+async function getMonthwiseClues(month, year) {
+  try {
+    const response = await fetch(`${BASE_URL}/crosswords-monthwise/clue-sitemap?month=${month}&year=${year}`)
+    if (!response.ok)
+      throw new Error(`HTTP error! status: ${response.status}`)
+
+    const blogs = await response.json()
+    return blogs
+  }
+  catch (error) {
+    console.error('Failed to fetch blogs:', error)
+    return []
+  }
+}
+
+export { getCategories, getFeaturedCategories, getDatelistsByCategorySlug, getCrosswordCluesByCategorySlugAndDate, getClueAnswerBySlug, getBlogById, createBlog, updateBlog, getMonthwiseClues }
