@@ -73,7 +73,7 @@ export default defineNuxtConfig({
    
   },
   site: {
-    url: 'https://c139f532.crosswords-ai8.pages.dev',
+    url: 'https://crosswords-ai8.pages.dev',
     
   },
 
