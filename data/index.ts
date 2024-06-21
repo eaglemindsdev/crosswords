@@ -29,5 +29,3 @@ export const aboutPage = {
   description: 'Software Engineer, Problem Solver, Web Enthusiast.',
   aboutMe: 'Hello, fellow human! I\'m a software wizard who spends most of his day crafting code spells at @AppsCode in the Bytebuilders team. When I\'m not crafting code, you can find me summoning solutions to problems on online judges. Just don\'t ask me to cast any love spells, my magic only works on machines!',
 }
-
-

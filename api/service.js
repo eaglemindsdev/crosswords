@@ -67,8 +67,6 @@ async function getFeaturedCategories() {
   }
 }
 
-
-
 // Fetch a single crosswords clue by slug
 async function getClueAnswerBySlug(slug) {
   try {

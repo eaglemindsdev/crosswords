@@ -58,12 +58,16 @@ export default {
         <div v-for="(puzzle, index) in puzzles.slice(0, 5)" :key="index" class="flex justify-between gap-2 items-center border-b dark:border-gray-800 border-b-gainsboro py-3">
           <NuxtLink :to="puzzle.link">
             <ul>
-              <li class="text-sm dark:text-zinc-300 lg:truncate hover:text-purple-800 active:underline">{{ puzzle.name }}</li>
+              <li class="text-sm dark:text-zinc-300 lg:truncate hover:text-purple-800 active:underline">
+                {{ puzzle.name }}
+              </li>
             </ul>
           </NuxtLink>
-          <NuxtLink :to="puzzle.link+'/'+puzzle.date">
+          <NuxtLink :to="`${puzzle.link}/${puzzle.date}`">
             <ul>
-              <li class="text-sm dark:text-zinc-300 lg:truncate hover:text-purple-800 active:underline">{{ puzzle.date }}</li>
+              <li class="text-sm dark:text-zinc-300 lg:truncate hover:text-purple-800 active:underline">
+                {{ puzzle.date }}
+              </li>
             </ul>
           </NuxtLink>
         </div>
@@ -72,12 +76,16 @@ export default {
         <div v-for="(puzzle, index) in puzzles.slice(5, 10)" :key="index" class="flex justify-between gap-2 items-center border-b border-b-gainsboro dark:border-gray-800 py-3">
           <NuxtLink :to="puzzle.link">
             <ul>
-              <li class="text-sm dark:text-zinc-300 lg:truncate hover:text-purple-800 active:underline">{{ puzzle.name }}</li>
+              <li class="text-sm dark:text-zinc-300 lg:truncate hover:text-purple-800 active:underline">
+                {{ puzzle.name }}
+              </li>
             </ul>
           </NuxtLink>
-          <NuxtLink :to="puzzle.link+'/'+puzzle.date">
+          <NuxtLink :to="`${puzzle.link}/${puzzle.date}`">
             <ul>
-              <li class="whitespace-nowrap place-self-start text-cws-gray-900 text-sm/7 dark:text-zinc-300 hover:text-purple-700 active:underline">{{ puzzle.date }}</li>
+              <li class="whitespace-nowrap place-self-start text-cws-gray-900 text-sm/7 dark:text-zinc-300 hover:text-purple-700 active:underline">
+                {{ puzzle.date }}
+              </li>
             </ul>
           </NuxtLink>
         </div>
@@ -85,7 +93,6 @@ export default {
     </div>
   </div>
 </template>
-
 
   <style scoped>
   /* Add your Tailwind CSS styles here */

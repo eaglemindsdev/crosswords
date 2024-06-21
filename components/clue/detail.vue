@@ -1,3 +1,24 @@
+<script setup lang="ts">
+import { defineProps, ref } from 'vue'
+import { useHead } from '@vueuse/head'
+
+const props = defineProps({
+  puzzles: Object, // Ensure you define the correct prop type
+})
+
+useHead({
+  title: `Clue: ${props.puzzles?.crossword} | ${props.puzzles?.crossword} Crossword Answer | ${props.puzzles?.formattedDate}`,
+
+  // Other SEO metadata as needed
+})
+
+const showAnswer = ref(false)
+
+function revealAnswer() {
+  showAnswer.value = true
+}
+</script>
+
 <template>
   <div>
     <h1 class="text-xl md:text-2xl lg:text-2xl font-bold mb-4">
@@ -26,30 +47,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref, computed } from 'vue'
-import { useHead } from '@vueuse/head'
-import { defineProps, withDefaults } from 'vue'
-
-
-
-const props = defineProps({
-  puzzles: Object, // Ensure you define the correct prop type
-})
-
-useHead({
-  title:`Clue: ${props.puzzles?.crossword} | ${props.puzzles?.crossword} Crossword Answer | ${props.puzzles?.formattedDate}`
-   
-  // Other SEO metadata as needed
-})
-
-const showAnswer = ref(false);
-
-function revealAnswer() {
-  showAnswer.value = true
-}
-</script>
 
 <style scoped>
 /* Your component's scoped styles */

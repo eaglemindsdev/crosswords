@@ -1,5 +1,13 @@
 <script setup lang="ts">
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
+const clue = ref('');
+const router = useRouter();
+
+const handleSubmit = () => {
+  router.push({ path: `/clue/${encodeURIComponent(clue.value)}` });
+};
 </script>
 
 <template>
@@ -7,10 +15,10 @@
     <h2 class="mb-5 text-xl leading-7 dark:text-zinc-300  lg:block">
       Search Crossword Answers
     </h2>
-    <form action="">
+    <form @submit.prevent="handleSubmit">
       <label for="text-input_1" class="text-base mb-3 block text-zinc-300 ">Enter Clue</label>
       <div class="relative w-full">
-        <input id="text-input_1" class="border border-washed-black focus:border-bailey-bells focus:shadow-[0px_0px_0px_1px_#888AD3_inset] rounded p-2 w-full" type="text" placeholder="e.g. games" title="e.g. japanese farewell" data-event="Enter Clue">
+        <input id="text-input_1" v-model="clue" class="border border-washed-black focus:border-bailey-bells focus:shadow-[0px_0px_0px_1px_#888AD3_inset] rounded p-2 w-full" type="text" placeholder="e.g. games" title="e.g. japanese farewell" data-event="Enter Clue">
         <div class="input-controls mr-3 absolute right-0 top-3">
           <span aria-label="search">
             <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

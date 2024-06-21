@@ -18,7 +18,6 @@ function onClick(val: string) {
         </li>
       </ul>
       <ul class="flex items-center space-x-3 sm:space-x-6 text-sm sm:text-lg">
-        
         <li>
           <ClientOnly>
             <button

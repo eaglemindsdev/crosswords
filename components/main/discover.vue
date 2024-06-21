@@ -30,7 +30,7 @@ onMounted(async () => {
 
     puzzles.value = categories.map(category => ({
       name: category.category_name,
-      link: category.slug,
+      link: `crossword-answers/`+category.slug,
       // Example logic to assign dates based on index
       date: getDateBasedOnIndex(categories.indexOf(category)),
       dateLink: category.slug,
@@ -77,7 +77,7 @@ function getDateBasedOnIndex(index: number): string {
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
       <template v-for="post in puzzles" :key="post.name">
         <div class="lg:col-span-1 lg:ml-4">
-          <HomeCategories
+          <HomePuzzlelist
             :name="post.name"
             :link="post.link"
             :date="post.date"

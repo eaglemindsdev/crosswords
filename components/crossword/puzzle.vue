@@ -30,7 +30,7 @@ onMounted(async () => {
 
     puzzles.value = categories.map(category => ({
       name: category.category_name,
-      link: `crossword-answers/${category.slug}`,
+      link: `${category.slug}`,
       // Example logic to assign dates based on index
       date: getDateBasedOnIndex(categories.indexOf(category)),
       dateLink: category.slug,
@@ -89,38 +89,15 @@ useHead({
     },
     {
       property: 'og:url',
-      content: 'https://yourwebsite.com/crossword-answers',
-    },
-    {
-      property: 'og:image',
-      content: 'https://yourwebsite.com/images/crossword-answers-og-image.jpg',
-    },
-    {
-      name: 'twitter:card',
-      content: 'summary_large_image',
-    },
-    {
-      name: 'twitter:title',
-      content: 'All Crossword Puzzle Answers Online - Latest Solutions | Crossword Solver',
-    },
-    {
-      name: 'twitter:description',
-      content: 'Find crossword puzzle answers for today. Solve puzzles from NYT, USA Today, LA Times, and more. Explore crossword-solving tips and resources.',
-    },
-    {
-      name: 'twitter:image',
-      content: 'https://yourwebsite.com/images/crossword-answers-twitter-image.jpg',
-    },
+      content: 'https://crosswordsolveronline.com/crossword-answers',
+    },    
     {
       name: 'canonical',
-      content: 'https://yourwebsite.com/crossword-answers',
-    }
+      content: 'https://crosswordsolveronline.com/crossword-answers',
+    },
   ],
   titleTemplate: 'Crossword Solver Online | %s',
 })
-
-
-
 </script>
 
 <template>

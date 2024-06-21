@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-
 useHead({
   title: 'Free Crossword Puzzle Answers & Solutions | Your Ultimate Puzzle Resource',
   meta: [
@@ -25,36 +24,16 @@ useHead({
     },
     {
       property: 'og:url',
-      content: 'https://yourwebsite.com',
-    },
-    {
-      property: 'og:image',
-      content: 'https://yourwebsite.com/images/og-image.jpg',
-    },
-    {
-      name: 'twitter:card',
-      content: 'summary_large_image',
-    },
-    {
-      name: 'twitter:title',
-      content: 'Free Crossword Puzzle Answers & Solutions | Your Ultimate Puzzle Resource',
-    },
-    {
-      name: 'twitter:description',
-      content: 'Find solutions for popular crosswords like NY Times, LA Times, USA Today, and more. Improve your puzzle-solving skills with our tips and resources.',
-    },
-    {
-      name: 'twitter:image',
-      content: 'https://yourwebsite.com/images/twitter-image.jpg',
-    },
+      content: 'https://crosswordsolveronline.com',
+    },   
+    
     {
       name: 'canonical',
-      content: 'https://yourwebsite.com',
-    }
+      content: 'crosswordsolveronline.com',
+    },
   ],
   titleTemplate: 'Crossword Solver online | %s',
 })
-
 
 // Generate OG Image
 // defineOgImageComponent('About', {

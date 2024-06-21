@@ -12,7 +12,7 @@ const category = computed(() => {
 
 const date = route.params.date as string
 
-const dateFormat = formatDate(date);
+const dateFormat = formatDate(date)
 
 const categoryName = computed(() => {
   return slugToNormalWords(category.value)
@@ -25,12 +25,12 @@ async function fetchPuzzles() {
   loading.value = false
   try {
     const response = await getCrosswordCluesByCategorySlugAndDate(category.value, date)
-   // console.log(response)
+    // console.log(response)
     puzzles.value = response.crosswordResults // Assuming the response structure
     puzzles.value.formattedDate = formatDate(puzzles.value.updated_time)
   }
   catch (error) {
-    console.error('Failed to load puzzles:', error);
+    console.error('Failed to load puzzles:', error)
   }
   finally {
     loading.value = false
@@ -46,23 +46,23 @@ function slugToNormalWords(slug: string): string {
     .join(' ')
 }
 useHead({
-  title: categoryName.value+' Crossword Answers - '+dateFormat ,
+  title: `${categoryName.value} Crossword Answers - ${dateFormat}`,
   meta: [
     {
       name: 'description',
-      content: 'Find '+categoryName.value+' crossword answers for '+dateFormat+'. Solve today’s puzzle and explore crossword-solving tips and resources.',
+      content: `Find ${categoryName.value} crossword answers for ${dateFormat}. Solve today’s puzzle and explore crossword-solving tips and resources.`,
     },
     {
       name: 'keywords',
-      content: categoryName.value+' crossword answers, '+dateFormat+', crossword solutions, daily crossword puzzles, puzzle-solving tips, crossword resources',
+      content: `${categoryName.value} crossword answers, ${dateFormat}, crossword solutions, daily crossword puzzles, puzzle-solving tips, crossword resources`,
     },
     {
       property: 'og:title',
-      content: categoryName.value+' Crossword Answers - '+dateFormat,
+      content: `${categoryName.value} Crossword Answers - ${dateFormat}`,
     },
     {
       property: 'og:description',
-      content: 'Find '+categoryName.value+' crossword answers for '+dateFormat+'. Solve today’s puzzle and explore crossword-solving tips and resources.',
+      content: `Find ${categoryName.value} crossword answers for ${dateFormat}. Solve today’s puzzle and explore crossword-solving tips and resources.`,
     },
     {
       property: 'og:type',
@@ -70,32 +70,13 @@ useHead({
     },
     {
       property: 'og:url',
-      content: 'https://yourwebsite.com/crossword-answers/'+category.value+'/'+date,
+      content: `https://crosswordsolveronline.com/crossword-answers/${category.value}/${date}`,
     },
-    {
-      property: 'og:image',
-      content: 'https://yourwebsite.com/images/usa-today-2024-06-15-og-image.jpg',
-    },
-    {
-      name: 'twitter:card',
-      content: 'summary_large_image',
-    },
-    {
-      name: 'twitter:title',
-      content: categoryName.value+' Crossword Answers - '+dateFormat+' | Crossword Solver',
-    },
-    {
-      name: 'twitter:description',
-      content: 'Find '+categoryName.value+' crossword answers for '+dateFormat+'. Solve today’s puzzle and explore crossword-solving tips and resources.',
-    },
-    {
-      name: 'twitter:image',
-      content: 'https://yourwebsite.com/images/usa-today-2024-06-15-twitter-image.jpg',
-    },
+    
     {
       name: 'canonical',
-      content: 'https://yourwebsite.com/crossword-answers/'+category.value+'/'+date,
-    }
+      content: `https://crosswordsolveronline.com/crossword-answers/${category.value}/${date}`,
+    },
   ],
   titleTemplate: 'Crossword Solver Online | %s',
 })
@@ -105,7 +86,6 @@ function formatDate(dateString: string): string {
   const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' }
   return date.toLocaleDateString('en-US', options)
 }
-
 </script>
 
 <template>
