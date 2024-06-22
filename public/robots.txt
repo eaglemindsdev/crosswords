@@ -17,4 +17,4 @@ User-agent: NinjaBot
 User-agent: seznam.cz
 User-agent: YandexBot
 User-agent: *
- Sitemap: https://crosswordsolveronline.com/sitemap_index.xml
+Sitemap: https://crosswordsolveronline.com/sitemap_index.xml

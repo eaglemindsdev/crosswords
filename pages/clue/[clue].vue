@@ -256,15 +256,13 @@ function revealAnswer() {
 
  
   <h3 class="text-black dark:text-zinc-300 font-semibold leading-tight">What is the answer to the clue '{{puzzles?.crossword}}'?</h3>
-  <p class="dark:text-zinc-300 pb-3">The most likely answer is {{puzzles?.answer}}, a {{puzzles?.answer.length}}-letter word</p>
+  <p class="dark:text-zinc-300 pb-3">The most likely answer is {{puzzles?.answer}}. a {{puzzles?.answer.length}}-letter word</p>
  
 
-  <h3 class="text-black dark:text-zinc-300 font-semibold leading-tight"> How often is the {{ puzzles?.category_name }}crossword updated?</h3>
-  <p class="dark:text-zinc-300 pb-3">The {{ puzzles?.category_name }} crossword is updated daily with new puzzles and solutions.</p>
+  <h3 class="text-black dark:text-zinc-300 font-semibold leading-tight"> How many letters are in the word '{{puzzles?.answer}}'?</h3>
+  <p class="dark:text-zinc-300 pb-3">{{puzzles?.answer}} consists of {{puzzles?.answer.length}} letters.</p>
  
 
-<h3 class="text-black dark:text-zinc-300 font-semibold leading-tight">Where can I find more crossword clues and solutions?</h3>
-<p class="dark:text-zinc-300 pb-3">You can find more clues and solutions on our website under the 'Crossword Answers' section.</p>
 
 
 
