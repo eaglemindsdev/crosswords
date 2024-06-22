@@ -69,9 +69,7 @@ export default defineNuxtConfig({
   },
   site: {
     url: 'https://crosswordsolveronline.com',
-
   },
-
   typescript: {
     strict: true,
   },
@@ -104,16 +102,11 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@stefanobartoletti/nuxt-social-share',
   ],
-  robots: {
-    rules: [
-      {
-        UserAgent: '*',
-        Disallow: ''
-      }
-    ],
+  robots: {      
+    UserAgent: '*',
+    Disallow: '',     
     Sitemap: 'https://crosswordsolveronline.com/sitemap.xml'
   },
-
   content: {
     highlight: {
       theme: 'dracula',

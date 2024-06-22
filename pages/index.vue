@@ -76,7 +76,7 @@ useHead({
 </ul>
 
 <h2 class="text-black dark:text-zinc-300   font-semibold leading-tight text-2xl md:text-3xl my-5 ">Find Answers to Crossword Clues</h2>
-<p>Simply enter your clue or known letters into our search bar and get instant results. Our crossword solver is designed to provide accurate answers quickly.</p>
+<p class="dark:text-zinc-300">Simply enter your clue or known letters into our search bar and get instant results. Our crossword solver is designed to provide accurate answers quickly.</p>
 
 
 
