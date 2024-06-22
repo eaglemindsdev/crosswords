@@ -68,13 +68,9 @@ export default defineNuxtConfig({
   },
   site: {
     url: 'https://crosswordsolveronline.com',
-    indexable: false
+    
   },
-  robots: {      
-    UserAgent: '*',
-    Disallow: '/clue/',     
-    Sitemap: 'https://crosswordsolveronline.com/sitemap_index.xml',
-  },
+ 
   typescript: {
     strict: true,
   },
