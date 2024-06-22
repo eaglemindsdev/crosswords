@@ -69,7 +69,7 @@ function getDateBasedOnIndex(index: number): string {
   <div class="pb-10 px-4">
     <div class="flex flex-row items-center space-x-3 pt-5 pb-3">
       <Icon name="mdi:star-three-points-outline" size="2em" class="text-black dark:text-zinc-300  " />
-      <h2 class="text-4xl font-semibold text-black dark:text-zinc-300   ">
+      <h2 class="text-black dark:text-zinc-300   font-semibold leading-tight text-2xl md:text-3xl my-5 ">
         Find More Puzzles
       </h2>
     </div>

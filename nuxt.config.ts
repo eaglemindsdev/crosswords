@@ -26,9 +26,9 @@ export default defineNuxtConfig({
     head: {
       charset: 'utf-16',
       viewport: 'width=device-width,initial-scale=1',
-      title: 'Crossword Solver',
-      titleTemplate: '%s | Crossword Solver',
-      meta: [{ name: 'description', content: 'Website' }],
+      title: 'Crossword Solver Online',
+      titleTemplate: '%s | Crossword Solver Online',
+      meta: [{ name: 'description', content: 'Solve crossword puzzles quickly with our online crossword solver. Find answers and solutions for any crossword clue with our free tool. Perfect for puzzle enthusiasts worldwide.' }],
     },
     pageTransition: { name: 'page', mode: 'out-in' },
     layoutTransition: { name: 'layout', mode: 'out-in' },
@@ -104,6 +104,15 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@stefanobartoletti/nuxt-social-share',
   ],
+  robots: {
+    rules: [
+      {
+        UserAgent: '*',
+        Disallow: ''
+      }
+    ],
+    Sitemap: 'https://crosswordsolveronline.com/sitemap.xml'
+  },
 
   content: {
     highlight: {

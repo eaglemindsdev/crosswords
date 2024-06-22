@@ -10,8 +10,8 @@ export const footerData = {
 }
 
 export const homePage = {
-  title: 'Welcome to the Ultimate Crossword Solver and Puzzle Resource',
-  description: 'Welcome to Crossword Solver Online, your number one source for solving all kinds of crossword puzzles. Our site is entire of anagrams, word definitions, or just a way to see if a given word fits into your current puzzle. Our vast database contains famous crossword solutions published in the New York Times, LA Times, USA Today, and many more. Read our blog for tips, tricks, and strategies to solve those terrific clues.',
+  title: 'Welcome to Crossword Solver Online',
+  description: 'Are you stuck on a challenging crossword puzzle? Our <b>crossword solver</b> is here to provide fast and accurate solutions. Whether you need crossword puzzle answers or help with anagrams, our online crossword solver offers reliable and free crossword solutions. Get instant crossword help with our easy-to-use tool, ensuring you never miss a clue. Explore our site for daily updates and make use of our daily crossword solver for consistent support. Our comprehensive crossword puzzle aid is designed to make solving puzzles fun and effortless.',
 }
 
 export const blogsPage = {

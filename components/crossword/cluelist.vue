@@ -22,7 +22,7 @@ withDefaults(defineProps<Props>(), {
 <template>
   <NuxtLink :to="`/clue/${data.clue_slug}`">
     <div class="flex justify-start items-center border-b border-b-gainsboro py-3 border-b dark:border-gray-800 py-3 dark:text-gray-300">
-      <li class="whitespace-nowrap place-self-start text-cws-gray-900 text-sm/7 text-nowrap hover:underline active:underline">
+      <li class="whitespace-nowrap text-cws-gray-900 text-sm hover:underline active:underline overflow-hidden text-ellipsis">
         {{ data.crossword }} Crossword Clue
       </li>
     </div>

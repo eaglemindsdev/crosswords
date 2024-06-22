@@ -22,12 +22,12 @@ async function fetchPuzzles() {
     fetchPuzzlesData(puzzles.value.cat_slug, extractDate(puzzles.value.updated_time))
 
     useHead({
-      title: `Clue: ${puzzles.value.crossword} | ${puzzles.value?.crossword} Crossword Answer | ${puzzles.value?.formattedDate}`,
+      title: ` ${puzzles.value?.crossword} Crossword Clue - ${puzzles.value?.formattedDate}`,
 
       meta: [
         {
           name: 'description',
-          content: `Discover the crossword clue "${puzzles.value?.crossword}" with answer "${puzzles.value?.answer}" from the USA Today crossword dated ${puzzles.value?.formattedDate}. Find crossword answers and solutions on our puzzle-solving platform.`,
+          content: `Discover the answer for the crossword clue '${puzzles.value?.crossword}' featured in the ${ puzzles?.category_name} puzzle on ${puzzles.value?.formattedDate}. Find the most likely solution and enhance your crossword-solving skills.`,
         },
         {
           name: 'keywords',
@@ -159,10 +159,10 @@ function revealAnswer() {
                   {{ puzzles ? `${puzzles.crossword} Crossword Clue` : 'Loading...' }}
                 </h1>
                 <p class="text-xs sm:text-sm my-3 mx-auto text-zinc-600 dark:text-zinc-400">
-                  Here is the answer for the crossword clue {{ puzzles?.crossword }} featured in {{ puzzles?.category_name }} puzzle on {{ puzzles?.formattedDate }}.
+                  Here’s the solution for the crossword clue {{ puzzles?.crossword }} featured in the {{ puzzles?.category_name }} puzzle on {{ puzzles?.formattedDate }}.
                 </p>
                 <p class="text-xs sm:text-sm my-3 mx-auto text-zinc-600 dark:text-zinc-400">
-                  We have found 40 possible answers for this clue in our database. Among them, one solution stands out with a 98% match which has a length of 5 letters. We think the likely answer to this clue is <span class="font-bold">{{ puzzles?.answer }}</span>.
+                  We have found 40 possible answers for this clue in our database, with the most likely answer being '{{ puzzles?.answer }}', which is a {{puzzles?.answer.length}}-letter word with a 98% match. which has a length of {{puzzles?.answer.length}} letters.
                 </p>
                 <h2 class="text-xl md:text-2xl lg:text-2xl font-semibold">
                   Crossword Answer:
@@ -241,12 +241,36 @@ function revealAnswer() {
                       </div>
                     </div>
                   </div>
+
+                  
                 </div>
               </section>
+              
             </div>
           </div>
         </div>
       </div>
+      <div class="pb-3 px-4 border-b border-b dark:border-gray-800 border-b-gainsboro py-3">
+    <h2 class="text-black dark:text-zinc-300 font-semibold leading-tight text-1xl md:text-2xl my-3 ">
+      FAQ:</h2>
+
+ 
+  <h3 class="text-black dark:text-zinc-300 font-semibold leading-tight">What is the answer to the clue '{{puzzles?.crossword}}'?</h3>
+  <p class="dark:text-zinc-300 pb-3">The most likely answer is {{puzzles?.answer}}, a {{puzzles?.answer.length}}-letter word</p>
+ 
+
+  <h3 class="text-black dark:text-zinc-300 font-semibold leading-tight"> How often is the {{ puzzles?.category_name }}crossword updated?</h3>
+  <p class="dark:text-zinc-300 pb-3">The {{ puzzles?.category_name }} crossword is updated daily with new puzzles and solutions.</p>
+ 
+
+<h3 class="text-black dark:text-zinc-300 font-semibold leading-tight">Where can I find more crossword clues and solutions?</h3>
+<p class="dark:text-zinc-300 pb-3">You can find more clues and solutions on our website under the 'Crossword Answers' section.</p>
+
+
+
+
+
+    </div>
     </div>
   </main>
 </template>

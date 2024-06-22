@@ -65,11 +65,11 @@ function getDateBasedOnIndex(index: number): string {
 }
 
 useHead({
-  title: 'All Crossword Puzzle Answers Online',
+  title: 'Solve Any Crossword Puzzle Quickly',
   meta: [
     {
       name: 'description',
-      content: 'Get the latest crossword puzzle answers for all major publications, including NYT, USA Today, LA Times, and more. Answers are updated daily.',
+      content: 'Find all crossword answers online with our powerful crossword solver. Get instant solutions to any crossword puzzle clue with ease.',
     },
     {
       name: 'keywords',
@@ -101,7 +101,9 @@ useHead({
 </script>
 
 <template>
+  
   <div class="pb-10 px-4">
+    
     <div class="flex flex-row items-center space-x-3 pt-5 pb-3">
       <Icon name="mdi:star-three-points-outline" size="2em" class="text-black dark:text-zinc-300  " />
       <h2 class="text-4xl font-semibold text-black dark:text-zinc-300   ">
