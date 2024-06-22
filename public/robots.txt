@@ -1,0 +1,20 @@
+User-agent: CCBot
+User-agent: ChatGPT
+User-agent: ChatGPT-User
+User-agent: PerplexityBot
+User-agent: BLEXBot
+User-agent: dotbot
+User-agent: AhrefsBot
+User-agent: SemrushBot
+User-agent: AhrefsSiteAudit
+User-agent: mj12bot
+User-agent: barkrowler
+User-agent: siteliner
+User-agent: linkbot
+User-agent: cliqzbot
+User-agent: NinjBot
+User-agent: NinjaBot
+User-agent: seznam.cz
+User-agent: YandexBot
+User-agent: *
+ Sitemap: https://crosswordsolveronline.com/sitemap_index.xml

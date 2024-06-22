@@ -9,7 +9,7 @@ useHead({
     {
       name: 'keywords',
       content: 'crossword puzzle answers, crossword solutions, NY Times crossword, LA Times crossword, USA Today crossword, puzzle-solving tips, crossword resources, Daily Themed crossword, Wall Street Journal crossword, Eugene Sheffer crossword, Thomas Joseph crossword, CodyCross, Universal crossword, Newsday crossword, 7 Little Words, Puzzle Page',
-    },
+    },    
     {
       property: 'og:title',
       content: 'Free Crossword Puzzle Answers & Solutions | Your Ultimate Puzzle Resource',

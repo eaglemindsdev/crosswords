@@ -51,7 +51,6 @@ export default defineNuxtConfig({
       return routes
     },
     sitemaps: {
-
       'crossword-answer-categories': {
         path: '/crossword-answer-categories.xml',
         urls: generateSitemapEntries,
@@ -69,11 +68,16 @@ export default defineNuxtConfig({
   },
   site: {
     url: 'https://crosswordsolveronline.com',
+    indexable: false
+  },
+  robots: {      
+    UserAgent: '*',
+    Disallow: '/clue/',     
+    Sitemap: 'https://crosswordsolveronline.com/sitemap_index.xml',
   },
   typescript: {
     strict: true,
   },
-
   nitro: {
     prerender: {
       crawlLinks: true,
@@ -101,12 +105,7 @@ export default defineNuxtConfig({
     '@nuxtjs/sitemap',
     '@nuxtjs/tailwindcss',
     '@stefanobartoletti/nuxt-social-share',
-  ],
-  robots: {      
-    UserAgent: '*',
-    Disallow: '',     
-    Sitemap: 'https://crosswordsolveronline.com/sitemap.xml'
-  },
+  ], 
   content: {
     highlight: {
       theme: 'dracula',
