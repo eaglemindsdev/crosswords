@@ -143,7 +143,7 @@ useHead({
       <MainSidebar />
     </div>
 
-    <div class="mt-3 px-3 col-span-12 lg:col-span-12">
+    <!-- <div class="mt-3 px-3 col-span-12 lg:col-span-12">
       <p class="text-1xl dark:text-zinc-300 pb-3"> Our free crossword solver is ideal for enthusiasts seeking fast, accurate crossword answers. Use our tool for quick solutions and to enhance your puzzle-solving experience.</p>
 
 <h2 class="text-1xl font-bold text-black dark:text-zinc-300">FAQ</h2>
@@ -159,6 +159,6 @@ useHead({
 <h3 class="text-black dark:text-zinc-300 font-semibold leading-tight">How to play {{ categoryName }} crossword?</h3>
 <p class="dark:text-zinc-300 pb-3">To play the {{ categoryName }} crossword, simply read the clues and fill in the answers in the corresponding boxes. It's a shorter version of the regular crossword, designed for quick play.</p>
      
-    </div>
+    </div> -->
   
   </template>

@@ -126,7 +126,7 @@ function formatDate(dateString: string): string {
   <div class="m-5 col-span-12 lg:col-span-4">
     <MainSidebar />
   </div>
-  <div class="mt-5 px-3 col-span-12 lg:col-span-12">
+  <!-- <div class="mt-5 px-3 col-span-12 lg:col-span-12">
     <h2 class="text-black dark:text-zinc-300 font-semibold leading-tight text-1xl md:text-2xl my-3 ">
       FAQ:</h2> 
       <h3 class="text-black dark:text-zinc-300 font-semibold leading-tight">hat is the {{ categoryName }} Crossword?</h3>
@@ -149,5 +149,5 @@ function formatDate(dateString: string): string {
       <p class="dark:text-zinc-300 pb-3">The {{ categoryName }} Crossword is updated every day with new puzzles and solutions.</p>
 
       
-  </div>
+  </div> -->
 </template>

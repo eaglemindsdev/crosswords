@@ -250,13 +250,13 @@ function revealAnswer() {
           </div>
         </div>
       </div>
-      <div class="pb-3 px-4 border-b border-b dark:border-gray-800 border-b-gainsboro py-3">
+      <!-- <div class="pb-3 px-4 border-b border-b dark:border-gray-800 border-b-gainsboro py-3">
     <h2 class="text-black dark:text-zinc-300 font-semibold leading-tight text-1xl md:text-2xl my-3 ">
       FAQ:</h2>
 
  
   <h3 class="text-black dark:text-zinc-300 font-semibold leading-tight">What is the answer to the clue '{{puzzles?.crossword}}'?</h3>
-  <p class="dark:text-zinc-300 pb-3">The most likely answer is {{puzzles?.answer}}. a {{puzzles?.answer.length}}-letter word</p>
+  <p class="dark:text-zinc-300 pb-3">The most likely answer is {{puzzles?.answer}}.</p>
  
 
   <h3 class="text-black dark:text-zinc-300 font-semibold leading-tight"> How many letters are in the word '{{puzzles?.answer}}'?</h3>
@@ -268,7 +268,7 @@ function revealAnswer() {
 
 
 
-    </div>
+    </div> -->
     </div>
   </main>
 </template>

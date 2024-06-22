@@ -88,7 +88,7 @@ useHead({
   <li class="text-sm lg:truncate  dark:text-gray-300 pb-1" >Get instant answers and enjoy solving your crossword puzzle.</li>
 </ol>
 </div>
-    <div class="pb-3 px-4 border-b border-b dark:border-gray-800 border-b-gainsboro py-3">
+    <!-- <div class="pb-3 px-4 border-b border-b dark:border-gray-800 border-b-gainsboro py-3">
     <h2 class="text-black dark:text-zinc-300 font-semibold leading-tight text-1xl md:text-2xl my-3 ">
       FAQ:</h2>
 
@@ -119,7 +119,7 @@ useHead({
  <p class="dark:text-zinc-300 pb-3">Definitely, our <strong>wordplays crossword solver</strong> feature helps you tackle complex wordplay puzzles.</p>
 
 
-    </div>
+    </div> -->
     <!-- <MainTrending /> -->
   </main>
 </template>
