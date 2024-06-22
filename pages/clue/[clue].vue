@@ -219,7 +219,16 @@ function revealAnswer() {
                 </tr> -->
               <!-- </tbody>
               </table> -->
-              <section id="all-related-clues-answer-by-date">
+              
+              
+            </div>
+          </div>
+        </div>
+        <div class="m-5 col-span-12 lg:col-span-4">
+          <MainSidebar />
+        </div>
+        <div class="m-5 col-span-12 lg:col-span-8">
+          <section id="all-related-clues-answer-by-date">
                 <div class="p-3 border dark:border-gray-800 rounded-md  dark:bg-slate-900">
                   <div class="px-2 flex flex-row items-start space-y-1 space-x-2">
                     <Icon name="mdi:star-three-points-outline" size="1.5em" class="text-black dark:text-zinc-300 mt-1" />
@@ -245,11 +254,9 @@ function revealAnswer() {
                   
                 </div>
               </section>
-              
-            </div>
-          </div>
         </div>
       </div>
+     
       <!-- <div class="pb-3 px-4 border-b border-b dark:border-gray-800 border-b-gainsboro py-3">
     <h2 class="text-black dark:text-zinc-300 font-semibold leading-tight text-1xl md:text-2xl my-3 ">
       FAQ:</h2>
