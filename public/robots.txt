@@ -55,12 +55,9 @@ Disallow:
 User-agent: *
 Disallow: /_nuxt/
 Disallow: /url(%22https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400
-Disallow: /_nuxt/entry.uUuj8pLK.css
-Disallow: /_nuxt/BezibmUp.js
-Disallow: /_nuxt/BQmZfcyQ.js
 Disallow: /fonts.gstatic.com/s/spacegrotesk/v16/V8mQoQDjQSkFtoMM3T6r8E7mF71Q-gOoraIAEj4PVksj.ttf
 Disallow: /fonts.gstatic.com/s/spacegrotesk/v16/V8mQoQDjQSkFtoMM3T6r8E7mF71Q-gOoraIAEj7oUUsj.ttf
 
 Sitemap: https://www.crosswordsolveronline.com/sitemap_index.xml
 
-Sitemap: https://www.crosswordsolveronline.com/sitemap_index.xml
+

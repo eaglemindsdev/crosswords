@@ -17,11 +17,11 @@ async function generateSitemapCategoryDateEntries() {
     const entries = data?.results.map(item => ({
 
       url: `/crossword-answers/${category.slug}/${item.updated_date}`, // Adjust URL structure as per your application
-      lastmod: new Date(item.updated_date).toISOString(), // Example: Use updated_date as lastmod (convert to ISO format)
-      changefreq: 'weekly',
-      priority: 0.8,
+      //lastmod: new Date(item.updated_date).toISOString(), // Example: Use updated_date as lastmod (convert to ISO format)
+     // changefreq: 'weekly',
+     // priority: 0.8,
 
-      lastUpdated: new Date().toISOString(), // Example: Set last updated timestamp
+      //lastUpdated: new Date().toISOString(), // Example: Set last updated timestamp
     }))
 
     // Push all entries for the current category into urls array

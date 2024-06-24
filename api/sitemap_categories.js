@@ -24,11 +24,11 @@ async function generateSitemapEntries() {
 
     urls.push({
       url: `/crossword-answers/${category.slug}`, // Adjust the URL structure as per your application
-      lastmod: startOfWeek.toISOString(), // Set lastmod to the beginning of the current week
-      changefreq: 'weekly',
-      priority: 0.8,
+      //lastmod: startOfWeek.toISOString(), // Set lastmod to the beginning of the current week
+     // changefreq: 'weekly',
+     // priority: 0.8,
 
-      lastUpdated: new Date().toISOString(), // Example: Set last updated timestamp
+      //lastUpdated: new Date().toISOString(), // Example: Set last updated timestamp
     })
   })
 
