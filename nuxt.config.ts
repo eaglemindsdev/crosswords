@@ -36,7 +36,7 @@ export default defineNuxtConfig({
 
   sitemap: {
     path: '/sitemap.xml', // Main sitemap path (optional)
-    hostname: 'http://localhost:3000', // Your website URL
+    hostname: 'https://www.crosswordsolveronline.com', // Your website URL
     gzip: true, // Enable gzip compression for the generated sitemap.xml
     exclude: ['/admin/**'], // Optional: Array of URLs to exclude from the sitemap
     routes: async (): Promise<SitemapRoute[]> => {
@@ -67,7 +67,7 @@ export default defineNuxtConfig({
 
   },
   site: {
-    url: 'https://crosswordsolveronline.com',
+    url: 'https://www.crosswordsolveronline.com',
     
   },
  

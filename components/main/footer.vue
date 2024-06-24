@@ -14,7 +14,7 @@ const path = computed(() => route.fullPath.replace('/', ''))
         <!-- <FooterConnect /> -->
       </div> 
 
-      <div class="border-t dark:border-gray-800 mt-5 text-center p-2">
+      <div class="border-t dark:border-gray-800 mt-5 text-center p-2 text-xs">
         © 2020-2024 All Rights Reserved. Crossword Solver Online.
       </div>
     </div>
