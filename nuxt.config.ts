@@ -88,6 +88,7 @@ export default defineNuxtConfig({
     preference: 'dark',
     fallback: 'light',
   },
+  target: 'ssr',
 
   modules: [
     'nuxt-icon',
