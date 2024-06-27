@@ -35,7 +35,7 @@ if (categories.value) {
 
   puzzles.value = sortedCategories.map((category, index) => ({
     name: category.category_name,
-    link: `${category.slug}`,
+    link: `crossword-answers/${category.slug}`,
     date: getDateBasedOnIndex(index),
     dateLink: category.slug,
   }))

@@ -1,7 +1,5 @@
 <script setup lang="ts">
-
 </script>
-
 <template>
   <main class="container max-w-6xl mx-auto text-zinc-600">
     <div class="container mx-auto">
@@ -14,11 +12,7 @@
           <p class="dark:text-zinc-300">Discover instant solutions to any crossword puzzle clue with our comprehensive solver.</p>
           <h2 class="text-black dark:text-zinc-300   font-semibold leading-tight text-1xl md:text-2xl my-3">Comprehensive Crossword Puzzle Solutions</h2>
           <p class="dark:text-zinc-300">Our solver offers accurate answers for puzzles from newspapers, magazines, and online platforms. Perfect for quick solutions or detailed answers, it helps you solve crossword puzzles effortlessly.</p>
-        </div>
-        
-        
-       
-        
+        </div>       
       </div>
     </div>
   </main>
