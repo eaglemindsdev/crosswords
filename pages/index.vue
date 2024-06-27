@@ -88,38 +88,7 @@ useHead({
   <li class="text-sm lg:truncate  dark:text-gray-300 pb-1" >Get instant answers and enjoy solving your crossword puzzle.</li>
 </ol>
 </div>
-    <!-- <div class="pb-3 px-4 border-b border-b dark:border-gray-800 border-b-gainsboro py-3">
-    <h2 class="text-black dark:text-zinc-300 font-semibold leading-tight text-1xl md:text-2xl my-3 ">
-      FAQ:</h2>
-
  
-  <h3 class="text-black dark:text-zinc-300 font-semibold leading-tight">How do I use the crossword solver?</h3>
-  <p class="dark:text-zinc-300 pb-3">Enter your crossword clue and any known letters into our <strong>crossword clue solver</strong> to get accurate answers quickly.</p>
- 
-
-  <h3 class="text-black dark:text-zinc-300 font-semibold leading-tight">Is the crossword solver free to use?</h3>
-  <p class="dark:text-zinc-300 pb-3">Yes, our <strong>online crossword solver</strong> offers free <strong>crossword solutions</strong> for all users.</p>
- 
-
-<h3 class="text-black dark:text-zinc-300 font-semibold leading-tight">Can I find answers for daily puzzles?</h3>
-<p class="dark:text-zinc-300 pb-3">Absolutely! Our <strong>daily crossword solver</strong>provides solutions for puzzles updated daily.</p>
-
-
- <h3 class="text-black dark:text-zinc-300 font-semibold leading-tight">Does your tool help with anagrams?</h3>
- <p class="dark:text-zinc-300 pb-3">Yes, our <strong>anagram solver</strong> helps you decode and solve anagrams efficiently.</p>
-
-
- <h3 class="text-black dark:text-zinc-300 font-semibold leading-tight">What makes your crossword solver different?</h3>
- <p class="dark:text-zinc-300 pb-3">Our tool offers fast, reliable, and <strong>free crossword solutions</strong> with a user-friendly interface designed for all skill levels.</p>
-
-<h3 class="text-black dark:text-zinc-300 font-semibold leading-tight">Can I solve specific letter-length clues?</h3>
-<p class="dark:text-zinc-300 pb-3">Yes, our tool includes options for solving <strong>crossword solver 5 letters</strong> and <strong>crossword solver 6 letters</strong> clues.</p>
-
- <h3 class="text-black dark:text-zinc-300 font-semibold leading-tight">Is there support for wordplay puzzles?</h3>
- <p class="dark:text-zinc-300 pb-3">Definitely, our <strong>wordplays crossword solver</strong> feature helps you tackle complex wordplay puzzles.</p>
-
-
-    </div> -->
     <!-- <MainTrending /> -->
   </main>
 </template>

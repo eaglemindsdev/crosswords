@@ -1,33 +1,16 @@
-<script>
+<script setup lang="ts">
+import { useAsyncData } from 'nuxt/app'
 import { getFeaturedCategories } from '@/api/service'
 
-export default {
+const { data: puzzles, pending, error } = await useAsyncData('featuredCategories', getFeaturedCategories)
 
-  data() {
-    return {
-      puzzles: [],
-      loading: true,
-    }
-  },
-  async created() {
-    try {
-      const categories = await getFeaturedCategories()
-      const today = new Date().toISOString().split('T')[0]
-      this.puzzles = categories.map(category => ({
-        name: category.category_name,
-        link: `crossword-answers/${category.slug}`,
-        date: today, // Adjust according to the actual data structure
-        dateLink: category.slug, // Adjust according to the actual data structure
-      }))
-    }
-    catch (error) {
-      console.error('Failed to load puzzles:', error)
-    }
-    finally {
-      this.loading = false
-    }
-  },
-}
+const today = new Date().toISOString().split('T')[0]
+const processedPuzzles = puzzles.value?.map(category => ({
+  name: category.category_name,
+  link: `crossword-answers/${category.slug}`,
+  date: today,
+  dateLink: category.slug,
+})) || []
 </script>
 
 <template>
@@ -38,8 +21,8 @@ export default {
     <p class="dark:text-zinc-300">
       Stay updated with the latest puzzles and solutions. Find today's top crossword puzzle answers:
     </p>
-
-    <div v-if="loading" class="grid grid-cols-1 lg:grid-cols-2">
+   
+    <div v-if="pending" class="grid grid-cols-1 lg:grid-cols-2">
       <div class="lg:col-span-1">
         <div v-for="n in 9" :key="n" class="flex justify-between gap-2 items-center border-b border-b-gainsboro dark:border-gray-800 py-3 animate-pulse">
           <div class="bg-gray-300 h-4 w-2/3 rounded" />
@@ -55,7 +38,7 @@ export default {
     </div>
     <div v-else class="grid grid-cols-1 lg:grid-cols-2">
       <div class="lg:col-span-1">
-        <div v-for="(puzzle, index) in puzzles.slice(0, 5)" :key="index" class="flex justify-between gap-2 items-center border-b dark:border-gray-800 border-b-gainsboro py-3">
+        <div v-for="(puzzle, index) in processedPuzzles.slice(0, 5)" :key="index" class="flex justify-between gap-2 items-center border-b dark:border-gray-800 border-b-gainsboro py-3">
           <NuxtLink :to="puzzle.link">
             <ul>
               <li class="text-sm dark:text-zinc-300 lg:truncate hover:text-purple-800 active:underline">
@@ -91,7 +74,9 @@ export default {
         </div>
       </div>
     </div>
+ 
   </div>
+
 </template>
 
   <style scoped>

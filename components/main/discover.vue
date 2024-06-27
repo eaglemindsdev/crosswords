@@ -1,57 +1,19 @@
-<script lang="ts" setup>
-import { onMounted, ref } from 'vue'
+<script setup lang="ts">
+import { useAsyncData } from 'nuxt/app'
+import { ref } from 'vue'
 import { getCategories } from '@/api/service'
 
-const puzzles = ref<any[]>([])
-const loading = ref(true)
+const { data: categories, pending, error } = await useAsyncData('categories', getCategories)
 
-onMounted(async () => {
-  try {
-    const categories = await getCategories()
-    const today = new Date()
-    const yesterday = new Date(today)
-    yesterday.setDate(yesterday.getDate() - 1)
-    const dayBeforeYesterday = new Date(today)
-    dayBeforeYesterday.setDate(dayBeforeYesterday.getDate() - 2)
+const puzzles = ref([])
 
-    // Sort categories based on the dates
-    categories.sort((a, b) => {
-      // Assuming your category object has a date field like category.publish_date
-      const dateA = new Date(a.publish_date)
-      const dateB = new Date(b.publish_date)
-
-      // Compare dates for sorting
-      if (dateA > dateB)
-        return -1 // Newest first
-      if (dateA < dateB)
-        return 1
-      return 0
-    })
-
-    puzzles.value = categories.map(category => ({
-      name: category.category_name,
-      link: `crossword-answers/`+category.slug,
-      // Example logic to assign dates based on index
-      date: getDateBasedOnIndex(categories.indexOf(category)),
-      dateLink: category.slug,
-    }))
-  }
-  catch (error) {
-    console.error('Failed to load puzzles:', error)
-  }
-  finally {
-    loading.value = false
-  }
-})
+const today = new Date()
+const yesterday = new Date(today)
+yesterday.setDate(yesterday.getDate() - 1)
+const dayBeforeYesterday = new Date(today)
+dayBeforeYesterday.setDate(dayBeforeYesterday.getDate() - 2)
 
 function getDateBasedOnIndex(index: number): string {
-  const today = new Date()
-  const yesterday = new Date(today)
-  yesterday.setDate(yesterday.getDate() - 1)
-  const dayBeforeYesterday = new Date(today)
-  dayBeforeYesterday.setDate(dayBeforeYesterday.getDate() - 2)
-
-  // Logic to return dates based on index
   switch (index % 3) {
     case 0:
       return yesterday.toISOString().split('T')[0]
@@ -62,6 +24,21 @@ function getDateBasedOnIndex(index: number): string {
     default:
       return today.toISOString().split('T')[0]
   }
+}
+
+if (categories.value) {
+  const sortedCategories = [...categories.value].sort((a, b) => {
+    const dateA = new Date(a.publish_date)
+    const dateB = new Date(b.publish_date)
+    return dateB.getTime() - dateA.getTime() // Newest first
+  })
+
+  puzzles.value = sortedCategories.map((category, index) => ({
+    name: category.category_name,
+    link: `crossword-answers/${category.slug}`,
+    date: getDateBasedOnIndex(index),
+    dateLink: category.slug,
+  }))
 }
 </script>
 
@@ -86,7 +63,7 @@ function getDateBasedOnIndex(index: number): string {
         </div>
       </template>
     </div>
-    <div v-if="loading" class="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3">
+    <div v-if="pending" class="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3">
       <div class="lg:col-span-1">
         <div v-for="n in 9" :key="n" class="flex justify-between gap-2 items-center border-b border-b-gainsboro py-3 animate-pulse">
           <div class="bg-gray-300 h-4 w-2/3 rounded" />
