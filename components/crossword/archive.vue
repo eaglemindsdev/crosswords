@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-import { computed, onMounted, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
+import { useAsyncData } from 'nuxt/app'
 import { getDatelistsByCategorySlug } from '@/api/service'
 
 const route = useRoute()
@@ -10,38 +11,29 @@ const category = computed(() => {
   return Array.isArray(name) ? name[0] : name
 })
 
-const categoryName = computed(() => {
-  return slugToNormalWords(category.value)
-})
+const categoryName = computed(() => slugToNormalWords(category.value))
 
-const puzzles = ref<any[]>([])
-const loading = ref(true)
 const page = ref(1)
 const limit = ref(10)
-const totalPages = ref(1)
 
-async function fetchPuzzles() {
-  loading.value = true
-  try {
-    const data = await getDatelistsByCategorySlug(category.value, page.value, limit.value)
-    puzzles.value = data.results.map((category: { updated_date: string }) => ({
-      date: category.updated_date,
-    }))
-    totalPages.value = data.pagination.pageCount
-  }
-  catch (error) {
-    console.error('Failed to load puzzles:', error)
-  }
-  finally {
-    loading.value = false
-  }
-}
+const { data, pending, error } = await useAsyncData(
+  () => getDatelistsByCategorySlug(category.value, page.value, limit.value)
+)
 
-onMounted(fetchPuzzles)
+const puzzles = computed(() => {
+  return data.value?.results.map((category: { updated_date: string }) => ({
+    date: category.updated_date,
+  })) || []
+})
+
+const totalPages = computed(() => data.value?.pagination.pageCount || 1)
 
 async function changePage(newPage: number) {
   page.value = newPage
-  await fetchPuzzles()
+  await useAsyncData(
+    () => getDatelistsByCategorySlug(category.value, page.value, limit.value),
+    { key: `${category.value}-${page.value}` } // Use a unique key for cache invalidation
+  )
 }
 
 function slugToNormalWords(slug: string): string {
@@ -52,8 +44,9 @@ function slugToNormalWords(slug: string): string {
 }
 
 useHead({
-  title: `${categoryName.value} Crossword Answers `,
+  title: `${categoryName.value} Crossword Answers`,
   meta: [
+    { charset: 'utf-8' },
     {
       name: 'description',
       content: `Find the latest ${categoryName.value} crossword answers online. Stay updated with daily puzzle answers and improve your crossword skills with our tips and resources.`,
@@ -77,8 +70,7 @@ useHead({
     {
       property: 'og:url',
       content: `https://crosswordsolveronline.com/crossword-answers/${category.value}`,
-    }, 
-    
+    },
     {
       name: 'canonical',
       content: `https://crosswordsolveronline.com/crossword-answers/${category.value}`,
@@ -118,7 +110,7 @@ useHead({
             </template>
           </div>
 
-          <div v-if="loading" class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1">
+          <div v-if="pending" class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1">
             <div class="lg:col-span-1">
               <div v-for="n in 9" :key="n" class="flex justify-between gap-2 items-center border-b border-b-gainsboro py-3 animate-pulse">
                 <div class="bg-gray-300 h-4 w-2/3 rounded" />
@@ -143,22 +135,6 @@ useHead({
       <MainSidebar />
     </div>
 
-    <!-- <div class="mt-3 px-3 col-span-12 lg:col-span-12">
-      <p class="text-1xl dark:text-zinc-300 pb-3"> Our free crossword solver is ideal for enthusiasts seeking fast, accurate crossword answers. Use our tool for quick solutions and to enhance your puzzle-solving experience.</p>
 
-<h2 class="text-1xl font-bold text-black dark:text-zinc-300">FAQ</h2>
-<h3 class="text-black dark:text-zinc-300 font-semibold leading-tight">What is the {{ categoryName }}?</h3>
-<p class="dark:text-zinc-300 pb-3">The {{ categoryName }} is a smaller, quicker version of the traditional crossword puzzle, often found in newspapers like the New York Times and USA Today.</p>
-
-<h3 class="text-black dark:text-zinc-300 font-semibold leading-tight">Is {{ categoryName }} Crossword free?</h3>
-<p class="dark:text-zinc-300 pb-3">Yes, the {{ categoryName }} Crossword offers a free version that users can enjoy, though there might be in-app purchases or ads.</p>
-
-<h3 class="text-black dark:text-zinc-300 font-semibold leading-tight">How often is the {{ categoryName }} crossword?</h3>
-<p class="dark:text-zinc-300 pb-3">The {{ categoryName }} crossword is typically available daily, providing a quick and engaging puzzle experience every day.</p>
-
-<h3 class="text-black dark:text-zinc-300 font-semibold leading-tight">How to play {{ categoryName }} crossword?</h3>
-<p class="dark:text-zinc-300 pb-3">To play the {{ categoryName }} crossword, simply read the clues and fill in the answers in the corresponding boxes. It's a shorter version of the regular crossword, designed for quick play.</p>
-     
-    </div> -->
   
   </template>

@@ -1,73 +1,80 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
-
-import { useHead } from '@vueuse/head' // Assuming you are using the vueuse/head package
+import { useHead } from '@vueuse/head'
 import { getClueAnswerBySlug, getCrosswordCluesByCategorySlugAndDate } from '@/api/service'
 
-const route = useRoute()
-const puzzles = ref<any>(null) // Ensure puzzles is initialized properly
-const puzzlesData = ref<any[]>([])
-const loading = ref(true)
-const loadingData = ref(true)
 
-async function fetchPuzzles() {
-  loading.value = true
+const route = useRoute()
+const showAnswer = ref(false)
+
+const category = computed(() => {
+  const name = route.params.clue || ''
+  return Array.isArray(name) ? name[0] : name
+})
+
+const { data: puzzles, pending: loading } = useAsyncData('puzzles', async () => {
   try {
     const response = await getClueAnswerBySlug(category.value)
-    puzzles.value = response[0] // Assuming the response structure
-    puzzles.value.formattedDate = formatDate(puzzles.value.updated_time)
-    puzzles.value.formattedDateOne = formatDateOne(puzzles.value.updated_time)
-
-    fetchPuzzlesData(puzzles.value.cat_slug, extractDate(puzzles.value.updated_time))
-
-    useHead({
-      title: ` ${puzzles.value?.crossword} Crossword Clue - ${puzzles.value?.formattedDate}`,
-
-      meta: [
-        {
-          name: 'description',
-          content: `Discover the answer for the crossword clue '${puzzles.value?.crossword}' featured in the ${ puzzles?.category_name} puzzle on ${puzzles.value?.formattedDate}. Find the most likely solution and enhance your crossword-solving skills.`,
-        },
-        {
-          name: 'keywords',
-          content: `${puzzles.value?.crossword} clue, crossword clue ${puzzles.value?.answer}, USA Today crossword ${puzzles.value?.formattedDate}, crossword answers, puzzle-solving platform`,
-        },
-        {
-          property: 'og:title',
-          content: `Clue: ${puzzles.value?.crossword} | USA Today Crossword Answer | ${puzzles.value?.formattedDate}`,
-        },
-        {
-          property: 'og:description',
-          content: `Discover the crossword clue "${puzzles.value?.crossword}" with answer "${puzzles.value?.answer}" from the USA Today crossword dated ${puzzles.value?.formattedDate}. Find crossword answers and solutions on our puzzle-solving platform.`,
-        },
-        {
-          property: 'og:type',
-          content: 'website',
-        },
-        {
-          property: 'og:url',
-          content: `https://crosswordsolveronline.com/clue/${route.params.clue}`, // Replace with actual URL
-        },       
-        {
-          name: 'canonical',
-          content: `https://crosswordsolveronline.com/clue/${route.params.clue}`, // Replace with actual canonical URL
-        },
-      ],
-      titleTemplate: '%s | Crossword Solver Online',
-    })
-  }
-  catch (error) {
+    const puzzle = response[0] // Assuming the response structure
+    puzzle.formattedDate = formatDate(puzzle.updated_time)
+    puzzle.formattedDateOne = formatDateOne(puzzle.updated_time)
+    return puzzle
+  } catch (error) {
     console.error('Failed to load puzzles:', error)
+    return null
   }
-  finally {
-    loading.value = false
-  }
-}
-
-onMounted(() => {
-  fetchPuzzles()
 })
+
+const { data: puzzlesData, pending: loadingData } = useAsyncData('puzzlesData', async () => {
+  if (!puzzles.value) return []
+  try {
+    const response = await getCrosswordCluesByCategorySlugAndDate(puzzles.value.cat_slug, extractDate(puzzles.value.updated_time))
+    return response.crosswordResults // Assuming the response structure
+  } catch (error) {
+    console.error('Failed to load puzzles data:', error)
+    return []
+  }
+})
+
+useHead(computed(() => {
+  if (!puzzles.value) return {}
+
+  return {
+    title: `${puzzles.value.crossword} Crossword Clue - ${puzzles.value.formattedDate}`,
+    meta: [
+      {
+        name: 'description',
+        content: `Discover the answer for the crossword clue '${puzzles.value.crossword}' featured in the ${puzzles.value.category_name} puzzle on ${puzzles.value.formattedDate}. Find the most likely solution and enhance your crossword-solving skills.`
+      },
+      {
+        name: 'keywords',
+        content: `${puzzles.value.crossword} clue, crossword clue ${puzzles.value.answer}, USA Today crossword ${puzzles.value.formattedDate}, crossword answers, puzzle-solving platform`
+      },
+      {
+        property: 'og:title',
+        content: `Clue: ${puzzles.value.crossword} | USA Today Crossword Answer | ${puzzles.value.formattedDate}`
+      },
+      {
+        property: 'og:description',
+        content: `Discover the crossword clue "${puzzles.value.crossword}" with answer "${puzzles.value.answer}" from the USA Today crossword dated ${puzzles.value.formattedDate}. Find crossword answers and solutions on our puzzle-solving platform.`
+      },
+      {
+        property: 'og:type',
+        content: 'website',
+      },
+      {
+        property: 'og:url',
+        content: `https://crosswordsolveronline.com/clue/${route.params.clue}`, // Replace with actual URL
+      },
+      {
+        name: 'canonical',
+        content: `https://crosswordsolveronline.com/clue/${route.params.clue}`, // Replace with actual canonical URL
+      },
+    ],
+    titleTemplate: '%s | Crossword Solver Online',
+  }
+}))
 
 function formatDate(dateString: string): string {
   const date = new Date(dateString)
@@ -91,27 +98,6 @@ function extractDate(dateString: string): string {
   return `${year}-${month}-${day}`
 }
 
-const category = computed(() => {
-  const name = route.params.clue || ''
-  return Array.isArray(name) ? name[0] : name
-})
-
-async function fetchPuzzlesData(cat_slug: string, date: string) {
-  loadingData.value = true
-  try {
-    const response = await getCrosswordCluesByCategorySlugAndDate(cat_slug, date)
-    puzzlesData.value = response.crosswordResults // Assuming the response structure
-  }
-  catch (error) {
-    console.error('Failed to load puzzles data:', error)
-  }
-  finally {
-    loadingData.value = false
-  }
-}
-
-const categoryName = computed(() => slugToNormalWords(category.value))
-
 function slugToNormalWords(slug: string): string {
   return slug
     .split('-')
@@ -119,15 +105,12 @@ function slugToNormalWords(slug: string): string {
     .join(' ')
 }
 
-const showAnswer = ref(false)
+const categoryName = computed(() => slugToNormalWords(category.value))
 
 function revealAnswer() {
   showAnswer.value = true
 }
-
-
 </script>
-
 <template>
   <main class="container max-w-6xl mx-auto">
     <div class="container">
@@ -180,47 +163,6 @@ function revealAnswer() {
                   </div>
                 </div>
               </div>
-
-              <!-- <h2 class="text-xl font-semibold mb-2">40 Potential Answers:</h2>
-              <table class="min-w-full">
-                <tbody class="dark:bg-slate-900"> -->
-              <!-- <tr
-                v-for="answer in clueData.potentialAnswers"
-                        :key="answer.answer" class="border dark:border-gray-800 p-4 dark:bg-slate-900"
-
-                >
-                  <td colspan=5 class="gap-2">
-                    <div class="grid grid-cols-1 px-5">
-
-                        <div class="flex justify-between items-center mb-2">
-                          <span class="py-1.5 text-center block text-xs font-bold h-7 w-12 rounded-sm bg-green-100 text-green-900">
-                            {{ answer.rank }}
-                          </span>
-                          <span class="text-base text-gray-600 block">{{ answer.length }} Letters</span>
-                          <span class="text-sm text-gray-500">{{ answer.date }}</span>
-                        </div>
-                        <div class="flex justify-between items-center mb-2">
-                          <a
-                            :href="`https://crossword-solver.io/answer/${answer.answer.toLowerCase()}/`"
-                            class="font-bold text-lg mb-1 underline decoration-1 hover:decoration-gray-500"
-                          >
-                            {{ answer.answer }}
-                          </a>
-                          <div class="text-sm text-gray-500">
-                          {{ answer.source }}
-                        </div>
-
-                        </div>
-
-                    </div>
-
-                  </td>
-
-                </tr> -->
-              <!-- </tbody>
-              </table> -->
-              
-              
             </div>
           </div>
         </div>
@@ -250,32 +192,10 @@ function revealAnswer() {
                       </div>
                     </div>
                   </div>
-
-                  
                 </div>
               </section>
         </div>
       </div>
-     
-      <!-- <div class="pb-3 px-4 border-b border-b dark:border-gray-800 border-b-gainsboro py-3">
-    <h2 class="text-black dark:text-zinc-300 font-semibold leading-tight text-1xl md:text-2xl my-3 ">
-      FAQ:</h2>
-
- 
-  <h3 class="text-black dark:text-zinc-300 font-semibold leading-tight">What is the answer to the clue '{{puzzles?.crossword}}'?</h3>
-  <p class="dark:text-zinc-300 pb-3">The most likely answer is {{puzzles?.answer}}.</p>
- 
-
-  <h3 class="text-black dark:text-zinc-300 font-semibold leading-tight"> How many letters are in the word '{{puzzles?.answer}}'?</h3>
-  <p class="dark:text-zinc-300 pb-3">{{puzzles?.answer}} consists of {{puzzles?.answer.length}} letters.</p>
- 
-
-
-
-
-
-
-    </div> -->
     </div>
   </main>
 </template>

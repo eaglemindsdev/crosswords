@@ -1,33 +1,19 @@
-<script>
+<script setup lang="ts">
+import { ref, computed } from 'vue'
+import { useAsyncData } from 'nuxt/app'
 import { getCategories } from '@/api/service'
 
-export default {
+const { data: categories, pending, error } = await useAsyncData('categories', getCategories)
 
-  data() {
-    return {
-      puzzles: [],
-      loading: true,
-    }
-  },
-  async created() {
-    try {
-      const categories = await getCategories()
-      const today = new Date().toISOString().split('T')[0]
-      this.puzzles = categories.map(category => ({
-        name: category.category_name,
-        link: `/crossword-answers/${category.slug}`,
-        date: today, // Adjust according to the actual data structure
-        dateLink: category.slug, // Adjust according to the actual data structure
-      }))
-    }
-    catch (error) {
-      console.error('Failed to load puzzles:', error)
-    }
-    finally {
-      this.loading = false
-    }
-  },
-}
+const puzzles = computed(() => {
+  const today = new Date().toISOString().split('T')[0]
+  return categories.value?.map(category => ({
+    name: category.category_name,
+    link: `/crossword-answers/${category.slug}`,
+    date: today, // Adjust according to the actual data structure
+    dateLink: category.slug, // Adjust according to the actual data structure
+  })) || []
+})
 </script>
 
 <template>
@@ -39,7 +25,7 @@ export default {
 
       <NuxtLink
         v-for="link in puzzles" :key="link.id" :to="`${link.link}`"
-        class="block text-xs mb-3 hover:underline dark:text-gray-300"
+        class="block text-sm mb-3 hover:underline dark:text-gray-300"
       >
         {{ link.name }}
       </NuxtLink>

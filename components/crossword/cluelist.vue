@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import { defineProps, withDefaults } from 'vue'
 
 interface Props {
@@ -6,7 +6,6 @@ interface Props {
     id: number
     clue_slug: string
     crossword: string
-
   }
 }
 
@@ -14,7 +13,6 @@ withDefaults(defineProps<Props>(), {
   data: {
     clue_slug: 'No Name',
     crossword: 'No Date',
-
   },
 })
 </script>
@@ -28,3 +26,9 @@ withDefaults(defineProps<Props>(), {
     </div>
   </NuxtLink>
 </template>
+
+<style scoped>
+li {
+  list-style: none;
+}
+</style>

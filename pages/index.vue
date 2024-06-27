@@ -2,6 +2,7 @@
 useHead({
   title: 'Fast & Free Crossword Puzzle Solutionss | Your Ultimate Puzzle Resource',
   meta: [
+   { charset: 'utf-8' },
     {
       name: 'description',
       content: 'Solve crossword puzzles quickly with our online crossword solver. Find answers and solutions for any crossword clue with our free tool. Perfect for puzzle enthusiasts worldwide.',

@@ -3,6 +3,9 @@ useHead({
   htmlAttrs: {
     lang: 'en',
   },
+  meta: [
+    { charset: 'utf-8' }
+]
 
 })
 </script>
