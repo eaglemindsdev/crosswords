@@ -54,6 +54,7 @@ Disallow:
 
 User-agent: *
 Allow: /
+Disallow: /api/*
 
 Sitemap: https://www.crosswordsolveronline.com/sitemap_index.xml
 
