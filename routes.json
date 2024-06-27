@@ -1,0 +1,19 @@
+[
+    {
+      "source": "/about",
+      "destination": "/about.html"
+    },
+    {
+      "source": "/clue/:clue",
+      "destination": "/blog/[clue].html"
+    },
+    {
+      "source": "/crossword-answers/:slug/:date",
+      "destination": "/crossword-answers/[slug]/[date].html"
+    },
+    {
+      "source": "/",
+      "destination": "/index.html"
+    }
+  ]
+  
