@@ -115,9 +115,7 @@ function revealAnswer() {
   <main class="container max-w-6xl mx-auto">
     <div class="container">
       <div class="grid grid-cols-1 sm:grid-cols-12 items-start">
-        <div class="m-5 col-span-12 lg:col-span-4">
-          <MainSearch />
-        </div>
+        
         <div class="col-span-12 lg:col-span-8">
           <div class="prose prose-pre:max-w-xs sm:prose-pre:max-w-full prose-sm sm:prose-base md:prose-lg prose-h1:no-underline max-w-5xl mx-auto prose-zinc dark:prose-invert prose-img:rounded-lg">
             <div class="container mx-auto p-4">
@@ -167,8 +165,9 @@ function revealAnswer() {
           </div>
         </div>
         <div class="m-5 col-span-12 lg:col-span-4">
-          <MainSidebar />
+          <MainSearch />
         </div>
+       
         <div class="m-5 col-span-12 lg:col-span-8">
           <section id="all-related-clues-answer-by-date">
                 <div class="p-3 border dark:border-gray-800 rounded-md  dark:bg-slate-900">
@@ -194,6 +193,9 @@ function revealAnswer() {
                   </div>
                 </div>
               </section>
+        </div>
+        <div class="m-5 col-span-12 lg:col-span-4">
+          <MainSidebar />
         </div>
       </div>
     </div>
