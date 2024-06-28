@@ -77,10 +77,12 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       crawlLinks: true,
-      routes: [
-        '/',
-      ],
+      routes:[ ],
     },
+  },
+  routeRules: {    
+    "/crossword-answers/**": { prerender: true },
+    "/clue/**": { prerender: true },
   },
 
   colorMode: {
