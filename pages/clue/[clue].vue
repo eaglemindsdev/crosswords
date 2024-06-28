@@ -163,12 +163,6 @@ function revealAnswer() {
               </div>
             </div>
           </div>
-        </div>
-        <div class="m-5 col-span-12 lg:col-span-4">
-          <MainSearch />
-        </div>
-       
-        <div class="m-5 col-span-12 lg:col-span-8">
           <section id="all-related-clues-answer-by-date">
                 <div class="p-3 border dark:border-gray-800 rounded-md  dark:bg-slate-900">
                   <div class="px-2 flex flex-row items-start space-y-1 space-x-2">
@@ -178,7 +172,7 @@ function revealAnswer() {
                     </h2>
                   </div>
                   <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1">
-                    <template v-for="post in puzzlesData" :key="post.cat_slug">
+                    <template v-for="post in puzzlesData" :key="post.id">
                       <div class="lg:ml-4">
                         <CrosswordCluelist :data="post" />
                       </div>
@@ -195,8 +189,10 @@ function revealAnswer() {
               </section>
         </div>
         <div class="m-5 col-span-12 lg:col-span-4">
+          <MainSearch />
           <MainSidebar />
-        </div>
+        </div>   
+        
       </div>
     </div>
   </main>

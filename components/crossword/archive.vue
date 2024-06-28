@@ -83,19 +83,14 @@ useHead({
   <template>
     
     <div class="mt-3 px-3 col-span-12 lg:col-span-8">
+      <div>
       <h1 class="text-black dark:text-zinc-300 font-bold leading-tight text-1xl md:text-2xl my-5">{{ categoryName }} Crossword Answers</h1>
       <p class="text-1xl dark:text-zinc-300">Get instant solutions to <strong>{{ categoryName }}</strong> crossword puzzles with our comprehensive solver.</p>
       <h2 class="text-black dark:text-zinc-300 font-bold leading-tight text-1xl md:text-2xl my-3">Quick and Accurate Solutions for {{ categoryName }} Crosswords</h2>
     <p class="text-1xl dark:text-zinc-300">Our solver offers precise answers for <strong>{{ categoryName }}</strong> crossword puzzles. Whether you’re solving puzzles from today's edition or past issues, our tool helps you find the correct answers quickly and effortlessly.</p>
-     
-    </div>
-    <div class="m-5 col-span-12 lg:col-span-4">
-      <MainSearch />
-    </div>
-    
-    <div class="mt-5 px-3 col-span-12 lg:col-span-8">
-      <div class="border dark:border-gray-800 p-3 rounded-md min-w-[200px] dark:bg-slate-900">
-        <div class="pb-5 px-2">
+      </div>
+      <div class="border dark:border-gray-800 p-2 mt-2 rounded-md min-w-[200px] dark:bg-slate-900">
+        
           <div class="flex flex-row items-center space-x-3 pt-5 pb-3">
             <Icon name="mdi:star-three-points-outline" size="1em" class="text-black dark:text-zinc-300" />
             <h2 class="text-1xl font-bold text-black dark:text-zinc-300">
@@ -129,13 +124,11 @@ useHead({
               Next
             </button>
           </div>
-        </div>
+        
       </div>
     </div>
     <div class="m-5 col-span-12 lg:col-span-4">
+      <MainSearch />
       <MainSidebar />
-    </div>
-
-
-  
+    </div>  
   </template>
