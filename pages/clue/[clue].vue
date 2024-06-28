@@ -26,16 +26,23 @@ const { data: puzzles, pending: loading } = useAsyncData('puzzles', async () => 
   }
 })
 
-const { data: puzzlesData, pending: loadingData } = useAsyncData('puzzlesData', async () => {
-  if (!puzzles.value) return []
-  try {
-    const response = await getCrosswordCluesByCategorySlugAndDate(puzzles.value.cat_slug, extractDate(puzzles.value.updated_time))
-    return response.crosswordResults // Assuming the response structure
-  } catch (error) {
-    console.error('Failed to load puzzles data:', error)
-    return []
+const puzzlesData = ref([])
+const loadingData = ref(true)
+
+watch(puzzles, async (newPuzzle) => {
+  if (newPuzzle) {
+    try {
+      loadingData.value = true
+      const response = await getCrosswordCluesByCategorySlugAndDate(newPuzzle.cat_slug, extractDate(newPuzzle.updated_time))
+      puzzlesData.value = response.crosswordResults // Assuming the response structure
+    } catch (error) {
+      console.error('Failed to load puzzles data:', error)
+      puzzlesData.value = []
+    } finally {
+      loadingData.value = false
+    }
   }
-})
+}, { immediate: true })
 
 useHead(computed(() => {
   if (!puzzles.value) return {}
