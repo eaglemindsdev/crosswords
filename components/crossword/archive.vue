@@ -81,15 +81,16 @@ useHead({
 </script>
 
   <template>
-    <div class="m-5 col-span-12 lg:col-span-4">
-      <MainSearch />
-    </div>
+    
     <div class="mt-3 px-3 col-span-12 lg:col-span-8">
       <h1 class="text-black dark:text-zinc-300 font-bold leading-tight text-1xl md:text-2xl my-5">{{ categoryName }} Crossword Answers</h1>
       <p class="text-1xl dark:text-zinc-300">Get instant solutions to <strong>{{ categoryName }}</strong> crossword puzzles with our comprehensive solver.</p>
       <h2 class="text-black dark:text-zinc-300 font-bold leading-tight text-1xl md:text-2xl my-3">Quick and Accurate Solutions for {{ categoryName }} Crosswords</h2>
     <p class="text-1xl dark:text-zinc-300">Our solver offers precise answers for <strong>{{ categoryName }}</strong> crossword puzzles. Whether you’re solving puzzles from today's edition or past issues, our tool helps you find the correct answers quickly and effortlessly.</p>
      
+    </div>
+    <div class="m-5 col-span-12 lg:col-span-4">
+      <MainSearch />
     </div>
     
     <div class="mt-5 px-3 col-span-12 lg:col-span-8">

@@ -81,8 +81,8 @@ export default defineNuxtConfig({
     },
   },
   routeRules: {    
-    "/crossword-answers/**": { prerender: true },
-    "/clue/**": { prerender: true },
+    "/crossword-answers/**": { prerender: false },
+    "/clue/**": { prerender: false},
   },
 
   colorMode: {

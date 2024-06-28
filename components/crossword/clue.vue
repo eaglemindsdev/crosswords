@@ -80,11 +80,14 @@ function formatDate(dateString: string): string {
 </script>
 
 <template>
-  <div class="mt-5 px-3 col-span-12 lg:col-span-12">
+  <div class="mt-5 px-3 col-span-12 lg:col-span-8">
     <h1 class="text-1xl font-semibold text-black dark:text-zinc-300">{{ categoryName }} Crossword Answers - {{ dateFormat }}</h1>
     <p class="dark:text-zinc-300 pb-3">Welcome to the complete answers for the {{ categoryName }} crossword puzzle for {{ dateFormat }}. Find all the solutions and hints to help you solve today's puzzle efficiently.</p>
 
   </div>
+  <div class="m-5 col-span-12 lg:col-span-4">
+      <MainSearch />
+    </div>
   <div class="mt-5 px-3 col-span-12 lg:col-span-8">
     <div class="border dark:border-gray-800 p-3 rounded-md min-w-[200px] dark:bg-slate-900">
       <div class="pb-10 px-4">
