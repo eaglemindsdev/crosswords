@@ -48,7 +48,7 @@ useHead(computed(() => {
   if (!puzzles.value) return {}
 
   return {
-    title: `${puzzles?.value?.crossword} Crossword Clue ${puzzles?.value ? puzzles.value.answer.length : 1} letters`,
+    title: `${puzzles?.value?.crossword} Crossword ${puzzles?.value ? puzzles.value.answer.length : 1} letters clue`,
 
     meta: [
       {
