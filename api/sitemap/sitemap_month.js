@@ -32,7 +32,7 @@ export async function generateSitemapEntriesForMonth(monthSlug) {
 
   const urls = categories.map(category => ({
     url: `/clue/${category.clue_slug}`,
-    //lastmod: category.updated_time,
+    lastmod:new Date(category.updated_time).toISOString(),
     //changefreq: 'monthly',
     //priority: 0.8,
   }))

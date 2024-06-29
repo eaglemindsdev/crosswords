@@ -36,13 +36,6 @@ useHead({
   titleTemplate: 'Crossword Solver online | %s',
 })
 
-// Generate OG Image
-// defineOgImageComponent('About', {
-//   headline: 'Greetings 👋',
-//   title: 'Crossword Solver Online',
-//   description: 'Dive into web development with me and learn Js, Ts, Vue, Nuxt, Docker, k8s',
-//   link: '/riyad.jpg',
-// })
 </script>
 
 <template>
@@ -90,6 +83,6 @@ useHead({
 </ol>
 </div>
  
-    <!-- <MainTrending /> -->
+  
   </main>
 </template>

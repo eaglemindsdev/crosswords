@@ -24,7 +24,7 @@ interface SitemapRoute {
 export default defineNuxtConfig({
   app: {
     head: {
-      charset: 'utf-16',
+      charset: 'utf-8',
       viewport: 'width=device-width,initial-scale=1',
       title: 'Crossword Solver Online',
       titleTemplate: '%s | Crossword Solver Online',
@@ -107,7 +107,7 @@ export default defineNuxtConfig({
   ], 
   content: {
     highlight: {
-      theme: 'dracula',
+      theme: 'night-owl',
     },
   },
 })

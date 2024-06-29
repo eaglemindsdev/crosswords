@@ -7,7 +7,7 @@
       <div class="m-5 col-span-12 lg:col-span-8">
         <h1 class="text-2xl font-bold mb-5">Contact Us</h1>
         <p class="dark:text-zinc-300">
-        If you would like to get in touch with us, please send a message to contact@crossword-solver.io
+        If you would like to get in touch with us, please send a message to admin@eagleminds.net
         </p>
       </div>
     </div>

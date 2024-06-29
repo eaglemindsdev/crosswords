@@ -16,15 +16,11 @@ async function generateSitemapEntries() {
     // Adjust startOfWeek to the beginning of the current week (Sunday)
     startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay())
 
-    // Example: Define images for the category
-    const images = [
-      { loc: 'https://example.com/image1.jpg', title: 'Image 1' },
-      { loc: 'https://example.com/image2.jpg', title: 'Image 2' },
-    ]
+    
 
     urls.push({
       url: `/crossword-answers/${category.slug}`, // Adjust the URL structure as per your application
-      //lastmod: startOfWeek.toISOString(), // Set lastmod to the beginning of the current week
+      lastmod: new Date().toISOString(), // Set lastmod to the beginning of the current week
      // changefreq: 'weekly',
      // priority: 0.8,
 
