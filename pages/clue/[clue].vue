@@ -48,7 +48,7 @@ useHead(computed(() => {
   if (!puzzles.value) return {}
 
   return {
-    title: `${puzzles?.value?.crossword} Crossword ${puzzles?.value ? puzzles.value.answer.length : 1} letters clue`,
+    title: `${puzzles?.value?.crossword} Crossword Clue - ${puzzles?.value ? puzzles.value.answer.length : 1} Letters Answer`,
 
     meta: [
       {
@@ -80,7 +80,7 @@ useHead(computed(() => {
         content: `https://crosswordsolveronline.com/clue/${route.params.clue}`, // Replace with actual canonical URL
       },
     ],
-    titleTemplate: '%s - Crossword Solver Online',
+    titleTemplate: '%s | Crossword Solver Online',
   }
 }))
 
