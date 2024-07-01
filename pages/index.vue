@@ -78,7 +78,7 @@ useHead({
 <template>
   <main class="container max-w-6xl mx-auto text-zinc-600">
     <MainHero />
-    <MainDiscover />   
+      
     <div class="grid grid-cols-1 sm:grid-cols-12 items-center">
       <div class="m-5 col-span-12 lg:col-span-4">
         <HomeCategory title="Today's Crossword Clues" :clues="generalClues" />
@@ -103,7 +103,7 @@ useHead({
       </div>
     </div>
  
-
+    <MainDiscover /> 
  
    
 
