@@ -67,6 +67,21 @@ async function getFeaturedCategories() {
   }
 }
 
+async function getCrosswords() {
+  try {
+    const response = await fetch(`${BASE_URL}/home-crosswords?page=1&limit=1050`)
+    if (!response.ok)
+      throw new Error(`HTTP error! status: ${response.status}`)
+
+    const blogs = await response.json()
+    return blogs
+  }
+  catch (error) {
+    console.error('Failed to fetch blogs:', error)
+    return []
+  }
+}
+
 // Fetch a single crosswords clue by slug
 async function getClueAnswerBySlug(slug) {
   try {
@@ -83,82 +98,9 @@ async function getClueAnswerBySlug(slug) {
   }
 }
 
-// Fetch a single blog post by ID
-async function getBlogById(id) {
-  try {
-    const response = await fetch(`${BASE_URL}/blogs/${id}`)
-    if (!response.ok)
-      throw new Error(`HTTP error! status: ${response.status}`)
 
-    const blog = await response.json()
-    return blog
-  }
-  catch (error) {
-    console.error(`Failed to fetch blog with ID ${id}:`, error)
-    return null
-  }
-}
 
-// Create a new blog post
-async function createBlog(blogData) {
-  try {
-    const response = await fetch(`${BASE_URL}/blogs`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(blogData),
-    })
-    if (!response.ok)
-      throw new Error(`HTTP error! status: ${response.status}`)
 
-    const newBlog = await response.json()
-    return newBlog
-  }
-  catch (error) {
-    console.error('Failed to create blog:', error)
-    return null
-  }
-}
-
-// Update an existing blog post
-async function updateBlog(id, blogData) {
-  try {
-    const response = await fetch(`${BASE_URL}/blogs/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(blogData),
-    })
-    if (!response.ok)
-      throw new Error(`HTTP error! status: ${response.status}`)
-
-    const updatedBlog = await response.json()
-    return updatedBlog
-  }
-  catch (error) {
-    console.error(`Failed to update blog with ID ${id}:`, error)
-    return null
-  }
-}
-
-// Delete a blog post
-async function deleteBlog(id) {
-  try {
-    const response = await fetch(`${BASE_URL}/blogs/${id}`, {
-      method: 'DELETE',
-    })
-    if (!response.ok)
-      throw new Error(`HTTP error! status: ${response.status}`)
-
-    return { message: 'Blog deleted successfully' }
-  }
-  catch (error) {
-    console.error(`Failed to delete blog with ID ${id}:`, error)
-    return null
-  }
-}
 
 async function getMonthwiseClues(month, year) {
   try {
@@ -175,4 +117,4 @@ async function getMonthwiseClues(month, year) {
   }
 }
 
-export { getCategories, getFeaturedCategories, getDatelistsByCategorySlug, getCrosswordCluesByCategorySlugAndDate, getClueAnswerBySlug, getBlogById, createBlog, updateBlog, getMonthwiseClues }
+export { getCrosswords, getCategories, getFeaturedCategories, getDatelistsByCategorySlug, getCrosswordCluesByCategorySlugAndDate, getClueAnswerBySlug,  getMonthwiseClues }

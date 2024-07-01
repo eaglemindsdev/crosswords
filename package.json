@@ -10,7 +10,8 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
-    "@nuxtjs/sitemap": "^5.2.0"
+    "@nuxtjs/sitemap": "^5.2.0",
+    "vuex": "^4.1.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.42.0",
