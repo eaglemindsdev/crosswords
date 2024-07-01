@@ -144,14 +144,12 @@ function revealAnswer() {
                 </div>
               </div>
               <div v-else>
-                <h1 class="text-xl md:text-2xl lg:text-2xl font-bold mb-4">
+                <h1 class="text-xl md:text-2xl lg:text-2xl font-bold mb-3">
                   {{ puzzles ? `${puzzles.crossword} Crossword Clue` : 'Loading...' }}
                 </h1>
                 <p class="text-sm sm:text-sm my-3 mx-auto text-zinc-600 dark:text-zinc-400">
-                  Here’s the solution for the crossword clue {{ puzzles?.crossword }} featured in the {{ puzzles?.category_name }} puzzle on {{ puzzles?.formattedDate }}.
-                </p>
-                <p class="text-sm sm:text-sm my-3 mx-auto text-zinc-600 dark:text-zinc-400">
-                  We have found possible answers for this clue in our database, with the most likely answer being '{{ puzzles?.answer }}', which is a {{puzzles?.answer.length}}-letter word with a 98% match. which has a length of {{puzzles?.answer.length}} letters.
+                  Here’s the solution for the crossword clue <strong>{{ puzzles?.crossword }}</strong>featured in the <strong>{{ puzzles?.category_name }}</strong> puzzle on <strong>{{ puzzles?.formattedDate }}</strong>.                
+                  We have found possible answers for this clue in our database, with the most likely answer being '<strong>{{ puzzles?.answer }}</strong>', which is a <strong>{{puzzles?.answer.length}}-letter word</strong> with a 98% match.
                 </p>
                 <h2 class="text-xl md:text-2xl lg:text-2xl font-semibold">
                   Crossword Answer:
