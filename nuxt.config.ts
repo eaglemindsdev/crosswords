@@ -1,6 +1,7 @@
 import { defineNuxtConfig } from 'nuxt/config'
 import generateSitemapEntries from './api/sitemap_categories'
 import generateSitemapCategoryDateEntries from './api/sitemap/sitemap_category_datewise'
+import generateClue from './api/sitemap/sitemap_clues'
 
 import { generateSitemapEntriesForMonth, getLast10Months } from './api/sitemap/sitemap_month' // Adjust path as per your project structure
 
@@ -58,6 +59,10 @@ export default defineNuxtConfig({
       'crossword-answer-datewise': {
         path: '/crossword-answer-datewise.xml',
         urls: generateSitemapCategoryDateEntries,
+      },
+      'clue-posts': {
+        path: '/clue-posts.xml',
+        urls: generateClue,
       },
       ...monthUrl(),
 

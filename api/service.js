@@ -104,6 +104,7 @@ async function getClueAnswerBySlug(slug) {
 
 async function getMonthwiseClues(month, year) {
   try {
+    
     const response = await fetch(`${BASE_URL}/crosswords-monthwise/clue-sitemap?month=${month}&year=${year}`)
     if (!response.ok)
       throw new Error(`HTTP error! status: ${response.status}`)
