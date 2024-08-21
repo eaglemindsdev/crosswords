@@ -18,16 +18,32 @@ if (error.value) {
 }
 
 // Compute the blog data
-const data = computed<BlogPost>(() => ({
+const data = computed<BlogPost>(() => {
+  const formatDate = (dateStr: string) => {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
+
+  return {
+
+  
   title: articles.value?.title || 'No title available',
   description: articles.value?.description_1 || 'No description available',
   image: `https://img.crosswordsolveronline.com/${articles.value?.image}` || '/not-found.jpg',
   alt: articles.value?.title || 'No alt text available',
   
-  date: articles.value?.updated_at || 'No date available',
+  date: articles.value?.updated_at ? formatDate(articles.value.updated_at) : 'No date available',
   
   published: articles.value?.status || false,
-}));
+};
+});
+
+
 
 // Table of Contents (TOC) logic
 const links = ref<{ id: string; text: string }[]>([]);
@@ -104,7 +120,7 @@ useHead({
   link: [
     {
       rel: 'canonical',
-      href: `${path}`,
+      href: `https://www.crosswordsolveronline.com/blogs/${path}`,
     },
   ],
 })

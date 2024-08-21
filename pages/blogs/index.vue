@@ -15,16 +15,26 @@ const { data: blogData, refresh } = await useAsyncData('blogData', () =>
 
 // Format blog data
 const formattedData = computed(() => {
-  return blogData.value?.data?.map((article) => ({
+  return blogData.value?.data?.map((article) => {
+    const formattedDate = article.updated_at
+      ? new Date(article.updated_at).toLocaleDateString('en-US', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        })
+      : 'not-date-available';
+      return {
     path: `/blogs/${article.slug || 'gg'}`,
     title: article.title || 'No title available',
     description: article.description_1 || 'No description available',
     image: article.image ? `https://img.crosswordsolveronline.com/${article.image}` : '/not-found.jpg',
     alt: article.title || 'No alt text available',
     ogImage: article.image ? `https://img.crosswordsolveronline.com/${article.image}` : '/not-found.jpg',
-    date: article.updated_at || 'No date available',
-  })) || []
-})
+    date: formattedDate || 'No date available',
+  };
+}) || []
+});
 
 // Filter data based on search term
 const searchData = computed(() => {
@@ -66,11 +76,8 @@ useHead({
   meta: [
     { name: 'description', content: 'Explore our archive of crossword solver blogs. Find tips, tricks, and strategies to solve crosswords.' },
     { name: 'keywords', content: 'crossword solver, crossword tips, crossword strategies, crossword blogs, crossword solutions, crossword puzzles' },
-    { property: 'og:title', content: 'Archive - Crossword Solver Online Blog' },
-    { property: 'og:description', content: 'Explore our archive of crossword solver blogs. Find tips, tricks, and strategies to solve crosswords.' },
-    { property: 'og:image', content: ogImage.value },
-    { property: 'og:url', content: useSiteConfig().url + '/blogs' }, // Ensure you have a site configuration
-    { property: 'og:type', content: 'website' }
+
+    { rel: 'canonical', href: useSiteConfig().url + '/blogs' } // Canonical URL
   ]
 })
 </script>

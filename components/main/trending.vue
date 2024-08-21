@@ -5,7 +5,7 @@ import { useHead } from '@vueuse/head'
 import { getBlogs } from '@/api/service'
 
 const elementPerPage = ref(5)
-const pageNumber = ref(2)
+const pageNumber = ref(3)
 const searchTest = ref('')
 const data = ref<any[]>([])
 
@@ -15,18 +15,30 @@ const { data: blogDataTrend, refresh } = await useAsyncData('blogDataTrend', () 
   getBlogs(pageNumber.value, elementPerPage.value)
 )
 
+
 const formattedData = computed(() => {
-  return blogDataTrend.value?.data?.map((articles) => ({
-    path: '/blogs/'+articles.slug || 'gg',
-    title: articles.title || 'no-title available',
-    description: atob(articles.description_1) || 'no-description available',
-    image: articles.image ? `https://img.crosswordsolveronline.com/${articles.image}` : '/not-found.jpg',
-    alt: articles.title || 'no alter data available',
-    ogImage: articles.image ? `https://img.crosswordsolveronline.com/${articles.image}` : '/not-found.jpg',
-    date: articles.updated_at || 'not-date-available',
- 
-  })) || []
-})
+  return blogDataTrend.value?.data?.map((articles) => {
+    // Format the date if it exists
+    const formattedDate = articles.updated_at
+      ? new Date(articles.updated_at).toLocaleDateString('en-US', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        })
+      : 'not-date-available';
+
+    return {
+      path: '/blogs/' + (articles.slug || 'gg'),
+      title: articles.title || 'no-title available',
+      description: articles.description_1 || 'no-description available',
+      image: articles.image ? `https://img.crosswordsolveronline.com/${articles.image}` : '/not-found.jpg',
+      alt: articles.title || 'no alt data available',
+      ogImage: articles.image ? `https://img.crosswordsolveronline.com/${articles.image}` : '/not-found.jpg',
+      date: formattedDate
+    };
+  }) || [];
+});
 </script>
 
 <template>

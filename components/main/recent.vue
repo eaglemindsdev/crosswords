@@ -15,18 +15,46 @@ const { data: blogDataRecent, refresh } = await useAsyncData('blogDataRecent', (
   getBlogs(pageNumber.value, elementPerPage.value)
 )
 
+
+const date = new Date('2024-08-21T10:56:55');
+
+
+const options = { 
+  weekday: 'long', 
+  year: 'numeric', 
+  month: 'long', 
+  day: 'numeric'
+};
+
+
+const formattedDate = date.toLocaleDateString('en-US', options);
+
+
+
+
 const formattedData = computed(() => {
-  return blogDataRecent.value?.data?.map((articles) => ({
-    path: '/blogs/'+articles.slug || 'gg',
-    title: articles.title || 'no-title available',
-    description: articles.description_1 || 'no-description available',
-    image: articles.image ? `https://img.crosswordsolveronline.com/${articles.image}` : '/not-found.jpg',
-    alt: articles.title || 'no alter data available',
-    ogImage: articles.image ? `https://img.crosswordsolveronline.com/${articles.image}` : '/not-found.jpg',
-    date: articles.updated_at || 'not-date-available',
- 
-  })) || []
-})
+  return blogDataRecent.value?.data?.map((articles) => {
+    // Format the date if it exists
+    const formattedDate = articles.updated_at
+      ? new Date(articles.updated_at).toLocaleDateString('en-US', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        })
+      : 'not-date-available';
+
+    return {
+      path: '/blogs/' + (articles.slug || 'gg'),
+      title: articles.title || 'no-title available',
+      description: articles.description_1 || 'no-description available',
+      image: articles.image ? `https://img.crosswordsolveronline.com/${articles.image}` : '/not-found.jpg',
+      alt: articles.title || 'no alt data available',
+      ogImage: articles.image ? `https://img.crosswordsolveronline.com/${articles.image}` : '/not-found.jpg',
+      date: formattedDate
+    };
+  }) || [];
+});
 </script>
 
 <template>

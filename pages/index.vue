@@ -38,7 +38,7 @@ useHead({
     
     {
       name: 'canonical',
-      content: 'crosswordsolveronline.com',
+      content: 'https://www.crosswordsolveronline.com',
     },
   ],
   titleTemplate: 'Crossword Solver online | %s',
