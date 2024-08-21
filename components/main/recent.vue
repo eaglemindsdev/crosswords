@@ -1,23 +1,31 @@
 <script lang="ts" setup>
-// Get Last 6 Publish Post from the content/blog directory
-const { data } = await useAsyncData('recent-post', () =>
-  queryContent('/blogs').limit(3).sort({ _id: -1 }).find(),
+import { ref, computed } from 'vue'
+import { useAsyncData } from 'nuxt/app'
+import { useHead } from '@vueuse/head'
+import { getBlogs } from '@/api/service'
+
+const elementPerPage = ref(8)
+const pageNumber = ref(1)
+const searchTest = ref('')
+const data = ref<any[]>([])
+
+
+
+const { data: blogDataRecent, refresh } = await useAsyncData('blogDataRecent', () =>
+  getBlogs(pageNumber.value, elementPerPage.value)
 )
 
 const formattedData = computed(() => {
-  return data.value?.map((articles) => {
-    return {
-      path: articles._path,
-      title: articles.title || 'no-title available',
-      description: articles.description || 'no-description available',
-      image: articles.image || '/not-found.jpg',
-      alt: articles.alt || 'no alter data available',
-      ogImage: articles.ogImage || '/not-found.jpg',
-      date: articles.date || 'not-date-available',
-      tags: articles.tags || [],
-      published: articles.published || false,
-    }
-  })
+  return blogDataRecent.value?.data?.map((articles) => ({
+    path: '/blogs/'+articles.slug || 'gg',
+    title: articles.title || 'no-title available',
+    description: atob(articles.description_1) || 'no-description available',
+    image: articles.image ? `https://www.crosswordsolveronline.com/${articles.image}` : '/not-found.jpg',
+    alt: articles.title || 'no alter data available',
+    ogImage: articles.image ? `https://www.crosswordsolveronline.com/${articles.image}` : '/not-found.jpg',
+    date: articles.updated_at || 'not-date-available',
+ 
+  })) || []
 })
 </script>
 
@@ -41,12 +49,12 @@ const formattedData = computed(() => {
           :alt="post.alt"
           :og-image="post.ogImage"
           :tags="post.tags"
-          :published="post.published"
+          
         />
       </template>
-      <template v-if="data?.length === 0">
+      <!-- <template v-if="data?.length === 0">
         <BlogEmpty />
-      </template>
+      </template> -->
     </div>
   </div>
 </template>

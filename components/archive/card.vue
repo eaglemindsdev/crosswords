@@ -7,8 +7,8 @@ interface Props {
   image?: string
   alt?: string
   ogImage?: string
-  tags?: Array<string>
-  published?: boolean
+
+
 }
 
 withDefaults(defineProps<Props>(), {
@@ -19,8 +19,8 @@ withDefaults(defineProps<Props>(), {
   image: '/blogs-img/blog.jpg',
   alt: 'no-alt',
   ogImage: '/blogs-img/blog.jpg',
-  tags: () => [],
-  published: false,
+  
+ 
 })
 </script>
 
@@ -39,20 +39,16 @@ withDefaults(defineProps<Props>(), {
         <h2 class="text-xl font-semibold text-black dark:text-zinc-300   pb-1 group-hover:text-sky-700 dark:group-hover:text-sky-400">
           {{ title }}
         </h2>
-        <p class="text-ellipsis line-clamp-2">
-          {{ description }}
-        </p>
+        
+          <p  class="text-ellipsis line-clamp-2" v-html="description"></p>
+       
+        
         <div class="text-black dark:text-zinc-300   text-sm mt-2 mb-1 md:flex md:space-x-6">
           <div class="flex items-center">
             <LogoDate />
             <p> {{ date }}</p>
           </div>
-          <div class="flex items-center gap-1 flex-wrap">
-            <LogoTag />
-            <p v-for="tag in tags" :key="tag">
-              {{ tag }}
-            </p>
-          </div>
+          
         </div>
         <div class="flex group-hover:underline text-sky-700 dark:text-sky-400 items-center pt-2">
           <p>Read More</p>
