@@ -1,77 +1,9 @@
 <script lang="ts" setup>
 
 import { ref, computed, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
-import { useHead } from '@vueuse/head'
-import { getBlogs } from '@/api/service'
 
-const elementPerPage = ref(10)
-const pageNumber = ref(1)
-const searchTest = ref('')
-const data = ref<any[]>([])
 
-const fetchData = async () => {
-  const route = useRoute()
-  //console.log(pageNumber.value);
-  const response = await getBlogs(
-    pageNumber.value,
-   elementPerPage.value
-    
-  )
-  data.value = response.data
-}
 
-onMounted(() => {
-  fetchData()
-})
-
-const formattedData = computed(() => {
-  return data.value?.map((articles) => {
-    return {
-      path: 'blogs/'+articles.slug,
-      title: articles.title || 'no-title available',
-      description: atob(articles.description_1) || 'no-description available',
-      image: 'https://www.crosswordsolveronline.com/'+articles.image || '/not-found.jpg',
-      alt: articles.title || 'no alter data available',
-      ogImage: 'https://www.crosswordsolveronline.com/'+articles.image || '/not-found.jpg',
-      date: articles.updated_at || 'not-date-available',
-    
-      published: articles.status|| false,
-    }
-  }) || []
-})
-
-const searchData = computed(() => {
-  return formattedData.value.filter((data) => {
-    const lowerTitle = data.title.toLocaleLowerCase()
-    return lowerTitle.includes(searchTest.value.toLocaleLowerCase())
-  }) || []
-})
-
-const paginatedData = computed(() => {
-  const startInd = (pageNumber.value - 1) * elementPerPage.value
-  const endInd = pageNumber.value * elementPerPage.value
-  return searchData.value.slice(startInd, endInd) || []
-})
-
-function onPreviousPageClick() {
-  if (pageNumber.value > 1) {
-    pageNumber.value -= 1
-    fetchData()
-  }
-}
-
-function onNextPageClick() {
-  if (pageNumber.value < totalPage.value) {
-    pageNumber.value += 1
-    fetchData()
-  }
-}
-
-const totalPage = computed(() => {
-  const ttlContent = searchData.value.length || 0
-  return Math.ceil(ttlContent / elementPerPage.value)
-})
 
 
 

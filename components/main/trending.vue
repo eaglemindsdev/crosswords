@@ -20,9 +20,9 @@ const formattedData = computed(() => {
     path: '/blogs/'+articles.slug || 'gg',
     title: articles.title || 'no-title available',
     description: atob(articles.description_1) || 'no-description available',
-    image: articles.image ? `https://www.crosswordsolveronline.com/${articles.image}` : '/not-found.jpg',
+    image: articles.image ? `https://img.crosswordsolveronline.com/${articles.image}` : '/not-found.jpg',
     alt: articles.title || 'no alter data available',
-    ogImage: articles.image ? `https://www.crosswordsolveronline.com/${articles.image}` : '/not-found.jpg',
+    ogImage: articles.image ? `https://img.crosswordsolveronline.com/${articles.image}` : '/not-found.jpg',
     date: articles.updated_at || 'not-date-available',
  
   })) || []
