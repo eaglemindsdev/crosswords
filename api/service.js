@@ -151,4 +151,21 @@ async function getBlog(slug){
   }
 }
 
-export {getBlogs, getBlog, getCrosswords, getCategories, getFeaturedCategories, getDatelistsByCategorySlug, getCrosswordCluesByCategorySlugAndDate, getClueAnswerBySlug,  getMonthwiseClues }
+async function getSitemaps(){
+
+  try {
+    
+    const responses = await fetch(`https://crossword-nirvakam.eagleminds.net/api/sitemap.php`)
+    if (!responses.ok)
+      throw new Error(`HTTP error! status: ${responses.status}`)
+
+    const blogss = await responses.json()
+    return blogss
+  }
+  catch (error) {
+    console.error('Failed to fetch blogs:', error)
+    return []
+  }
+}
+
+export {getBlogs, getBlog, getSitemaps, getCrosswords, getCategories, getFeaturedCategories, getDatelistsByCategorySlug, getCrosswordCluesByCategorySlugAndDate, getClueAnswerBySlug,  getMonthwiseClues }

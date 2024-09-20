@@ -1,6 +1,5 @@
 import { defineNuxtConfig } from 'nuxt/config'
-
-
+import { getSitemaps } from './api/service'
 
 export default defineNuxtConfig({
   app: {
@@ -33,6 +32,25 @@ export default defineNuxtConfig({
   // sitemap: {
   //   strictNuxtContentPaths: true,
   // },
+  sitemap: {
+    hostname: 'https://www.crosswordsolveronline.com',  // Replace with your actual domain
+    gzip: true,  // Compress the sitemap
+    routes: async () => {
+      try {
+      // Use the Nuxt 3 useAsyncData hook to fetch blog data
+      const { data: articles } = await useAsyncData('blogs', () => getSitemaps());
+      console.log('Articles:', articles.value);
+
+      // Map the data to the required route format
+      return articles.value.map((article: { slug: string }) => `/blogs/${article.slug}`);
+    } catch (error) {
+      console.error('Error fetching blog data:', error);
+      return []; // Return an empty array on error
+    }
+    },
+    path: '/sitemap.xml',  // The path to the sitemap file
+    exclude: [],  // Exclude routes if necessary
+  },
   site: {
     url: 'https://www.crosswordsolveronline.com',
   },
@@ -67,7 +85,7 @@ export default defineNuxtConfig({
     '@nuxtjs/robots',
     '@nuxtjs/fontaine',
     '@nuxtjs/color-mode',
-   // '@nuxtjs/sitemap',
+    '@nuxtjs/sitemap',
     '@nuxtjs/tailwindcss',
     '@stefanobartoletti/nuxt-social-share',
   ],

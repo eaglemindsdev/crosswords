@@ -1,19 +1,24 @@
 <script lang="ts" setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watch, watchEffect } from 'vue'
 import { useAsyncData } from 'nuxt/app'
 import { useHead } from '@vueuse/head'
 import { getBlogs } from '@/api/service'
 
-const elementPerPage = ref(10)
+const elementPerPage = ref(1000)
 const pageNumber = ref(1)
 const searchTest = ref('')
 
-// Fetch blog data with pagination
+// Fetch blogs and refresh the data
 const { data: blogData, refresh } = await useAsyncData('blogData', () =>
   getBlogs(pageNumber.value, elementPerPage.value)
 )
 
-// Format blog data
+// Watch pageNumber to refresh when it changes
+watch(pageNumber, async () => {
+  await refresh()
+})
+
+// Format blog data and ensure recalculation after data change
 const formattedData = computed(() => {
   return blogData.value?.data?.map((article) => {
     const formattedDate = article.updated_at
@@ -21,65 +26,79 @@ const formattedData = computed(() => {
           weekday: 'long',
           year: 'numeric',
           month: 'long',
-          day: 'numeric'
+          day: 'numeric',
         })
       : 'not-date-available';
-      return {
-    path: `/blogs/${article.slug || 'gg'}`,
-    title: article.title || 'No title available',
-    description: article.description_1 || 'No description available',
-    image: article.image ? `https://img.crosswordsolveronline.com/${article.image}` : '/not-found.jpg',
-    alt: article.title || 'No alt text available',
-    ogImage: article.image ? `https://img.crosswordsolveronline.com/${article.image}` : '/not-found.jpg',
-    date: formattedDate || 'No date available',
-  };
-}) || []
+    return {
+      path: `/blogs/${article.slug || '/blogs/'}`,
+      title: article.title || 'No title available',
+      description: article.description_1 || 'No description available',
+      image: article.image ? `https://img.crosswordsolveronline.com/${article.image}` : '/not-found.jpg',
+      alt: article.title || 'No alt text available',
+      ogImage: article.image ? `https://img.crosswordsolveronline.com/${article.image}` : '/not-found.jpg',
+      date: formattedDate || 'No date available',
+    };
+  }) || [];
 });
 
-// Filter data based on search term
+// Search and filter based on user input
 const searchData = computed(() => {
-  const lowerSearchTerm = searchTest.value.toLowerCase()
+  const lowerSearchTerm = searchTest.value.toLowerCase();
   return formattedData.value.filter((data) =>
     data.title.toLowerCase().includes(lowerSearchTerm)
-  )
-})
+  );
+});
 
 // Paginate the filtered data
 const paginatedData = computed(() => {
-  const startInd = (pageNumber.value - 1) * elementPerPage.value
-  const endInd = pageNumber.value * elementPerPage.value
-  return searchData.value.slice(startInd, endInd)
-})
+  const startInd = (pageNumber.value - 1) * elementPerPage.value;
+  const endInd = pageNumber.value * elementPerPage.value;
+  return searchData.value.slice(0, 19);
+});
 
-// Calculate total pages
-const totalPage = computed(() => Math.ceil(searchData.value.length / elementPerPage.value))
+// Calculate total pages from the API response
+const totalPage = computed(() => {
+  return Math.ceil(blogData.value?.total_results) || 1;
+});
 
 // Handle page navigation
 function onPageChange(delta: number) {
-  const newPageNumber = pageNumber.value + delta
+  const newPageNumber = pageNumber.value + delta;
   if (newPageNumber >= 1 && newPageNumber <= totalPage.value) {
-    pageNumber.value = newPageNumber
-    refresh() // Refresh the data
+    pageNumber.value = newPageNumber;
   }
 }
 
-const defaultOgImage = '/default.jpg'
+// Trigger watchEffect to ensure paginated data is recalculated properly when data changes
+watch(blogData, () => {
+  searchData.value; // Ensure paginated data is recalculated after data is fetched
+})
+
+
+
+
+const defaultOgImage = '/default.jpg';
 
 // Set OG image
 const ogImage = computed(() => {
-  return formattedData.value[0]?.image || defaultOgImage
-})
-
-// Set head meta information
+  return formattedData.value[0]?.image || defaultOgImage;
+});
 useHead({
   title: 'Archive - Crossword Solver Online Blog',
   meta: [
-    { name: 'description', content: 'Explore our archive of crossword solver blogs. Find tips, tricks, and strategies to solve crosswords.' },
-    { name: 'keywords', content: 'crossword solver, crossword tips, crossword strategies, crossword blogs, crossword solutions, crossword puzzles' },
-
-    { rel: 'canonical', href: useSiteConfig().url + '/blogs' } // Canonical URL
-  ]
-})
+    {
+      name: 'description',
+      content:
+        'Explore our archive of crossword solver blogs. Find tips, tricks, and strategies to solve crosswords.',
+    },
+    {
+      name: 'keywords',
+      content:
+        'crossword solver, crossword tips, crossword strategies, crossword blogs, crossword solutions, crossword puzzles',
+    },
+    { rel: 'canonical', href: useSiteConfig().url + '/blogs' }, // Canonical URL
+  ],
+});
 </script>
 
 <template>
@@ -108,11 +127,9 @@ useHead({
           :og-image="post.ogImage"
         />
       </template>
-      <ArchiveCard
-        v-if="paginatedData.length === 0"
-        title="No Post Found"
-        image="/not-found.jpg"
-      />
+      <template v-else>
+        <ArchiveCard title="No Post Found" description="no descriptions" image="/not-found.jpg" />
+      </template>
     </div>
 
     <div class="flex justify-center items-center space-x-6">

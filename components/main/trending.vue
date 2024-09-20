@@ -4,8 +4,8 @@ import { useAsyncData } from 'nuxt/app'
 import { useHead } from '@vueuse/head'
 import { getBlogs } from '@/api/service'
 
-const elementPerPage = ref(5)
-const pageNumber = ref(3)
+const elementPerPage = ref(24)
+const pageNumber = ref(2)
 const searchTest = ref('')
 const data = ref<any[]>([])
 
@@ -63,7 +63,7 @@ const formattedData = computed(() => {
           
         />
       </template>
-      <template v-if="data?.length === 0">
+      <template v-if="formattedData?.length === 0">
         <BlogEmpty />
       </template>
     </div>

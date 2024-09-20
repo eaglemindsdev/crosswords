@@ -4,7 +4,7 @@ import { useAsyncData } from 'nuxt/app'
 import { useHead } from '@vueuse/head'
 import { getBlogs } from '@/api/service'
 
-const elementPerPage = ref(8)
+const elementPerPage = ref(24)
 const pageNumber = ref(1)
 const searchTest = ref('')
 const data = ref<any[]>([])
